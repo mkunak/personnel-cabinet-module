@@ -1,9 +1,10 @@
-@import url("https://fonts.googleapis.com/css2?family=Roboto+Mono:wght@500&display=swap");
+@import url('https://fonts.googleapis.com/css2?family=Montserrat&display=swap');
+
 body,
 button,
 input {
-  font-family: "Gilroy", monospace;
-  color: #252525;
+  font-family: 'Montserrat', sans-serif;
+  color: #000000;
 }
 
 button,
@@ -14,6 +15,37 @@ input {
 button {
   cursor: pointer;
   border: none;
+}
+
+.flex-wrapper {
+  display: flex;
+  justify-content: space-between;
+}
+
+.navbar {
+  background-color: #69778a;
+}
+
+.navbar .logo img{
+  width: 150px;
+  height: 150px;
+}
+
+.navbar .navbar-nav {
+  width: 40vw;
+  display: flex;
+  justify-content: space-between;
+}
+
+.nav-item {
+  align-self: center;
+}
+
+.nav-link {
+  font-size: 2rem;
+  font-weight: 800;
+  color: floralwhite;
+  text-decoration: none;
 }
 
 .common-input {
@@ -67,6 +99,11 @@ input[type="date"]:hover::-webkit-calendar-picker-indicator:hover {
   box-shadow: 2px 0px 20px rgba(186, 200, 219, 0.50041);
 }
 
+.header__logo img{
+  width: 50px;
+  height: 50px;
+}
+
 .header .header__burger {
   cursor: pointer;
   background: #252525;
@@ -98,7 +135,7 @@ input[type="date"]:hover::-webkit-calendar-picker-indicator:hover {
 }
 
 .login-container {
-  width: 390px;
+  width: 31vw;
   margin: 0 auto;
   padding: 20px 15px;
 }
@@ -138,7 +175,6 @@ input[type="date"]:hover::-webkit-calendar-picker-indicator:hover {
   height: 100vh;
   background: #ffffff;
   box-shadow: 2px 0px 20px rgba(186, 200, 219, 0.50041);
-  border-radius: 0px 25px 25px 0px;
   padding: 30px;
   box-sizing: border-box;
   position: fixed;
@@ -549,6 +585,11 @@ input[type="date"]:hover::-webkit-calendar-picker-indicator:hover {
 
 .cabinet .sidebar__icon-wrapper {
   text-align: center;
+}
+
+.sidebar__icon-wrapper img{
+  width: 80px;
+  height: 80px;
 }
 
 .cabinet .sidebar__nav {
@@ -1058,7 +1099,8 @@ input[type="date"]:hover::-webkit-calendar-picker-indicator:hover {
 .cabinet__form_h3 {
   font-weight: bold;
   font-size: 21px;
-  margin-bottom: 20px;
+  margin-top: 50px;
+  margin-bottom: 70px;
 }
 
 .cabinet__form .main__form-inputs-row input {

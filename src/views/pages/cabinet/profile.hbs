@@ -33,7 +33,7 @@
         </div>
         <div class="cabinet__content-column">
           <div class="cabinet__scores">
-            <h4 class="cabinet__block-title">Количество Ваших поинтов</h4>
+            <h4 class="cabinet__block-title">Your points</h4>
             <div class="cabinet__scores-items">
               <div class="cabinet__scores-item">
                 <div class="cabinet__score-circle"></div>
@@ -49,7 +49,7 @@
         <div class="cabinet__content-column">
           <div class="cabinet__current-rate">
             <h4 class="cabinet__block-title">
-              Ваш текущий рейт
+              Your current rate
             </h4>
             <p class="cabinet__current-value">
               {{#each user.rates}}
@@ -57,7 +57,7 @@
                   <span class="cabinet__current-price">${{this}}</span>
                 {{/if}}
               {{/each}}
-              в час
+              per hour
             </p>
           </div>
         </div>
@@ -66,31 +66,31 @@
                 Для того, чтобы ошибка была на одном инпуте нужно добавить к блоку с классом main__form-item класс error -->
       <form action="" class="cabinet__form profile-data">
         <div class="cabinet__content-column">
-          <h3 class="cabinet__form_h3">Сведения об аккаунте</h3>
+          <h3 class="cabinet__form_h3">Account details</h3>
           <div class="main__form-item">
-            <p class="main__form-sign">Имя</p>
-            <input class="common-input profile-data-other profile-firstname" type="text" placeholder="Имя"
+            <p class="main__form-sign">Name</p>
+            <input class="common-input profile-data-other profile-firstname" type="text" placeholder="Name"
               value="{{user.firstName}}" disabled />
           </div>
           <div class="main__form-item">
-            <p class="main__form-sign">Электронная почта</p>
-            <input class="common-input profile-data-other profile-email" type="email" placeholder="Электронная почта"
+            <p class="main__form-sign">Email</p>
+            <input class="common-input profile-data-other profile-email" type="email" placeholder="Email"
               value="{{user.email}}" disabled />
           </div>
           <div class="main__form-inputs-row">
             <div class="main__form-item">
-              <p class="main__form-sign">День рождения</p>
+              <p class="main__form-sign">Birthday</p>
               <input class="common-input profile-data-other profile-birthday" type="date" value="{{user.birthday}}"
                 disabled />
             </div>
             <div class="main__form-item">
-              <p class="main__form-sign">Номер телефона</p>
-              <input class="common-input profile-data-other profile-phone" type="text" placeholder="Номер телефона"
+              <p class="main__form-sign">Phone</p>
+              <input class="common-input profile-data-other profile-phone" type="text" placeholder="Phone"
                 value="{{user.phone}}" disabled />
             </div>
           </div>
           <div class="main__form-positions">
-            <h3 class="main__form-subtitle">Должность</h3>
+            <h3 class="main__form-subtitle">Position</h3>
             <div class="main__form-positions-items profile-position-list">
               {{#each positions}}
                 {{#if isActive}}
@@ -103,40 +103,40 @@
           </div>
         </div>
         <div class="cabinet__content-column change-password">
-          <h3 class="cabinet__form_h3">Смена пароля</h3>
+          <h3 class="cabinet__form_h3">Change password</h3>
           <div class="main__form-item">
-            <p class="main__form-sign">Старый пароль</p>
+            <p class="main__form-sign">Current password</p>
             <input class="common-input old-password" name="oldPassword" type="password"
-              placeholder="Введите старый пароль" />
+              placeholder="Current password" />
           </div>
           <div class="main__form-item">
-            <p class="main__form-sign">Новый пароль</p>
+            <p class="main__form-sign">New password</p>
             <input class="common-input new-password" name="newPassword" type="password"
-              placeholder="Введите новый пароль">
+              placeholder="New password">
           </div>
           <div class="main__form-item">
-            <p class="main__form-sign">Повтор нового пароля</p>
+            <p class="main__form-sign">Repeat new password</p>
             <input class="common-input new-password-repeat" name="newPasswordRepeat" type="password"
-              placeholder="Повторите новый пароль">
+              placeholder="Repeat new password">
           </div>
           <div class="cabinet__form-change-wrapper">
             <button type="button" class="cabinet__form-change-password">
-              Изменить пароль
+              Change Password
             </button>
           </div>
           <div class="cabinet__form-change-wrapper">
             <button type="button" class="cabinet__form-edit-profile">
-              Редактировать данные
+              Edit data
             </button>
           </div>
           <div class="cabinet__form-change-wrapper">
             <button type="button" class="cabinet__form-change-personal-data" disabled>
-              Запросить изменение персональных данных
+              Request change of personal data
             </button>
           </div>
         </div>
         <div class="cabinet__content-column">
-          <h3 class="cabinet__form_h3">Ссылки для связи</h3>
+          <h3 class="cabinet__form_h3">Communication</h3>
           <div class="main__form-item">
             <p class="main__form-sign">Telegram</p>
             <input class="common-input profile-data-other profile-telegram" type="text" placeholder="t.me/ivshe"

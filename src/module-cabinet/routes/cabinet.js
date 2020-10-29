@@ -83,7 +83,7 @@ router.get("/dashboard", checkAuth, async (req, res) => {
     }
 
     res.render("pages/cabinet/dashboard", {
-      title: "GS App [Cabinet > Dashboard]",
+      title: "[Cabinet > Dashboard]",
       isCabinet: true,
       isDashboard: true,
       tip,
@@ -116,7 +116,7 @@ router.get("/profile", checkAuth, async (req, res) => {
     console.log(">>> user:", user);
 
     res.render("pages/cabinet/profile", {
-      title: "GS App [Cabinet > Profile]",
+      title: "[Cabinet > Profile]",
       isCabinet: true,
       isProfile: true,
       user,
@@ -141,7 +141,7 @@ router.get("/prereports", checkAuth, async (req, res) => {
 
     if (!prereport) {
       return res.render("pages/cabinet/prereports", {
-        title: "GS App [Cabinet > Prereports]",
+        title: "[Cabinet > Prereports]",
         isCabinet: true,
         isReports: true,
         tip,
@@ -156,7 +156,7 @@ router.get("/prereports", checkAuth, async (req, res) => {
     prereport.changed = DateFormatter.getDateFromStamp(changed, "time");
 
     res.render("pages/cabinet/prereports", {
-      title: "GS App [Cabinet > Prereports]",
+      title: "[Cabinet > Prereports]",
       isCabinet: true,
       isReports: true,
       tip,
@@ -181,7 +181,7 @@ router.get("/reports", checkAuth, async (req, res) => {
 
     if (!report) {
       return res.render("pages/cabinet/reports", {
-        title: "GS App [Cabinet > Reports]",
+        title: "[Cabinet > Reports]",
         isCabinet: true,
         isReports: true,
         tip,
@@ -196,7 +196,7 @@ router.get("/reports", checkAuth, async (req, res) => {
     report.changed = DateFormatter.getDateFromStamp(changed, "time");
 
     res.render("pages/cabinet/reports", {
-      title: "GS App [Cabinet > Reports]",
+      title: "[Cabinet > Reports]",
       isCabinet: true,
       isReports: true,
       tip,
@@ -234,7 +234,7 @@ router.get("/report-storage", checkAuth, async (req, res) => {
     });
 
     res.render("pages/cabinet/report-storage", {
-      title: "GS App [Cabinet > Report Storage]",
+      title: "[Cabinet > Report Storage]",
       isReportStorage: true,
       reports,
       prereports,
@@ -254,7 +254,7 @@ router.get("/overall-rating", checkAuth, async (req, res) => {
     console.log(users);
 
     res.render("pages/cabinet/overall-rating", {
-      title: "Cabinet > Overall Rating",
+      title: "[Cabinet > Overall Rating]",
       isCabinet: true,
       isOverallRating: true,
       users,

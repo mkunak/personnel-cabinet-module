@@ -11,7 +11,7 @@ const router = Router();
 
 router.get("/", (req, res) => {
   res.render("pages/auth/login", {
-    title: "GS App [Login]",
+    title: "[Login]",
     isLoginRegister: true,
     isLoggedIn: false,
     // isLoggedIn: JSON.stringify(req.session.isLoggedIn),

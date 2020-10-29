@@ -13,20 +13,20 @@
     <div class="cabinet-container">
       <div class="cabinet__links">
         <div class="cabinet__link-wrapper">
-          <a class="cabinet__link" href="/cabinet/prereports">Предрепорт</a>
+          <a class="cabinet__link" href="/cabinet/prereports">Prereport</a>
         </div>
         <div class="cabinet__link-wrapper active">
-          <a class="cabinet__link" href="/cabinet/reports">Репорт</a>
+          <a class="cabinet__link" href="/cabinet/reports">Report</a>
         </div>
       </div>
       <div class="cabinet__content-wrapper reports">
         <div class="cabinet__content-column">
           <div class="cabinet__report-last">
             <h4 class="cabinet__block-title">
-              Ваш последний репорт
+              Your last report
             </h4>
             <div class="cabinet__report-qa">
-              <p class="cabinet__report-quest">Дата и время отправки</p>
+              <p class="cabinet__report-quest">Date and time</p>
               <div class="cabinet__report-answers">
                 <p class="cabinet__report-answer">{{report.changed}}</p>
               </div>
@@ -71,7 +71,7 @@
             </div>
           </div>
           <div class="cabinet__archive">
-            <h2 class="cabinet__archive-title">Архив отчетов</h1>
+            <h2 class="cabinet__archive-title">Reports archive</h1>
               <button class="cabinet__button storage-btn">
                 <img src="/assets/img/next-icon.svg" alt="">
               </button>
@@ -80,34 +80,34 @@
         <div class="cabinet__content-column">
           <div class="cabinet__create-report">
             <h4 class="cabinet__block-title">
-              Создание нового репорта
+              Create new report
             </h4>
             <form action="" class="cabinet__create-report-form">
               <div class="cabinet__report-time">
                 <p class="cabinet__create-report-title">Working hours<span>*</span></p>
                 <div class="cabinet__create-input-wrapper">
-                  <input type="number" placeholder="чч:мм" min="0"
+                  <input type="number" placeholder="hh:mm" min="0" style="width: 100px"
                     class="common-input cabinet__create-report_input report-working-hours">
                 </div>
               </div>
               <div class="cabinet__report-tasks cabinet__report-done-tasks">
                 <p class="cabinet__create-report-title">Done tasks<span>*</span></p>
                 <div class="cabinet__create-input-wrapper report-done-task-wrapper">
-                  <input type="text" placeholder="1. Введите задачу"
+                  <input type="text" placeholder="1. Enter task"
                     class="common-input cabinet__create-report_input report-done-task">
                 </div>
               </div>
               <div class="cabinet__report-tasks cabinet__report-in-progress-tasks">
                 <p class="cabinet__create-report-title">Tasks in progress<span>*</span></p>
                 <div class="cabinet__create-input-wrapper report-in-progress-task-wrapper">
-                  <input type="text" placeholder="1. Введите задачу"
+                  <input type="text" placeholder="1. Enter task"
                     class="common-input cabinet__create-report_input report-in-progress-task">
                 </div>
               </div>
               <div class="cabinet__report-tasks cabinet__report-todo-tasks">
                 <p class="cabinet__create-report-title">Todo tasks<span>*</span></p>
                 <div class="cabinet__create-input-wrapper report-todo-task-wrapper">
-                  <input type="text" placeholder="1. Введите задачу"
+                  <input type="text" placeholder="1. Enter task"
                     class="common-input cabinet__create-report_input report-todo-task">
                 </div>
               </div>
@@ -120,7 +120,7 @@
               </div>
               <div class="cabinet__create-report-btn-wrapper">
                 <button class="cabinet__create-report_button">
-                  Отправить
+                  Send
                   <img src="/assets/img/next-icon.svg" alt="">
                 </button>
               </div>
@@ -129,7 +129,7 @@
         </div>
         <div class="cabinet__content-column">
           <div class="cabinet__advice">
-            <h3 class="cabinet__advice-title">Полезный </br> совет</h3>
+            <h3 class="cabinet__advice-title">Usefull </br> advice</h3>
             <div class="cabinet__advice-description">
               {{#each tip.data}}
                 <p class="cabinet__advice-description-item">{{this}}</p>

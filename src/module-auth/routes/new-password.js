@@ -39,7 +39,7 @@ router.get("/:token", async (req, res) => {
     const warning = req.flash("warning");
 
     res.render("pages/auth/new-password", {
-      title: "GS App [New password]",
+      title: "[New password]",
       isNewPassword: true,
       urlPrefixLanguage,
       userId: foundUser._id.toString(),

@@ -2,41 +2,41 @@
   {{>login/sidebar}}
   <div class="main">
     <div class="login-container">
-      <h2 class="main__sub-title">Шаг 1 из 3</h2>
-      <h1 class="main__title">Регистрация</h1>
+      <h2 class="main__sub-title">Step 1 / 3</h2>
+      <h1 class="main__title">Register</h1>
       <!-- Чтобы отображались ошибки на всех инпутах, нужно добавить к блоку 
       с классом main__form класс error. 
       Для того, чтобы ошибка была на одном инпуте нужно добавить к блоку 
       с классом main__form-item класс error -->
       <form class="main__form" name="register-1-form">
         <div class="main__form-item email">
-          <p class="main__form-sign">Электронная почта</p>
-          <input class="common-input" name="email" type="email" placeholder="Введите адрес эл. почты"
+          <p class="main__form-sign">Email</p>
+          <input class="common-input" name="email" type="email" placeholder="Enter email"
             id="user_register_form_email" />
         </div>
         <div class="main__form-item password">
-          <p class="main__form-sign">Пароль</p>
-          <input class="common-input password-input" name="password" type="password" placeholder="Введите желаемый пароль"
+          <p class="main__form-sign">Password</p>
+          <input class="common-input password-input" name="password" type="password" placeholder="Enter password"
             id="user_register_form_password" />
           <button type="button" class="main__form-item_button">
             <img src="/assets/img/eye.svg" alt="eye">
           </button>
         </div>
         <div class="main__form-item password-repeat">
-          <p class="main__form-sign">Повторите пароль</p>
-          <input class="common-input password-input" name="password_repeat" type="password" placeholder="Повторно введите пароль"
+          <p class="main__form-sign">Repeat password</p>
+          <input class="common-input password-input" name="password_repeat" type="password" placeholder="Repeat password"
             id="user_register_form_password_repeat" />
           <button type="button" class="main__form-item_button">
             <img src="/assets/img/eye.svg" alt="eye">
           </button>
         </div>
         <p class="main__form-details">
-          Пароль должен состоять минимум из 6 символов, содержать в себе одну заглавную букву и одну цифру
+          Password should consist of min 6 characters and containe min 1 digit and min 1 letter
         </p>
         <input type="hidden" name="_csrf" value="{{csrf}}" />
         <div class="main__form-buttons">
           <button class="main__form-current-btn register-one-btn">
-            Регистрация
+            Register
           </button>
           {{!-- <button class="main__form-other-link signin-btn">
             Вход

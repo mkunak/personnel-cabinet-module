@@ -13,32 +13,32 @@
     <div class="cabinet-container">
       <div class="cabinet__links">
         <div class="cabinet__link-wrapper active">
-          <a class="cabinet__link" href="/cabinet/prereports">Предрепорт</a>
+          <a class="cabinet__link" href="/cabinet/prereports">Prereport</a>
         </div>
         <div class="cabinet__link-wrapper">
-          <a class="cabinet__link" href="/cabinet/reports">Репорт</a>
+          <a class="cabinet__link" href="/cabinet/reports">Report</a>
         </div>
       </div>
       <div class="cabinet__content-wrapper reports">
         <div class="cabinet__content-column">
           <div class="cabinet__report-last">
             <h4 class="cabinet__block-title">
-              Ваш последний предрепорт
+              Your last prereport
             </h4>
             <div class="cabinet__report-qa">
-              <p class="cabinet__report-quest">Дата и время отправки</p>
+              <p class="cabinet__report-quest">Date and time</p>
               <div class="cabinet__report-answers">
                 <p class="cabinet__report-answer">{{prereport.changed}}</p>
               </div>
             </div>
             <div class="cabinet__report-qa">
-              <p class="cabinet__report-quest">Планируется работать</p>
+              <p class="cabinet__report-quest">Planned working hours</p>
               <div class="cabinet__report-answers">
-                <p class="cabinet__report-answer">{{prereport.workingHours}} часов</p>
+                <p class="cabinet__report-answer">{{prereport.workingHours}} hours</p>
               </div>
             </div>
             <div class="cabinet__report-qa">
-              <p class="cabinet__report-quest">Планируемые задачи</p>
+              <p class="cabinet__report-quest">Planned tasks</p>
               <div class="cabinet__report-answers">
                 {{#each prereport.tasks.todo}}
                   <p class="cabinet__report-answer">{{incremented @index}}. {{this}}</p>
@@ -47,7 +47,7 @@
             </div>
           </div>
           <div class="cabinet__archive">
-            <h2 class="cabinet__archive-title">Архив отчетов</h1>
+            <h2 class="cabinet__archive-title">Report archive</h1>
               <button class="cabinet__button storage-btn">
                 <img src="/assets/img/next-icon.svg" alt="">
               </button>
@@ -56,26 +56,26 @@
         <div class="cabinet__content-column">
           <div class="cabinet__create-report">
             <h4 class="cabinet__block-title">
-              Создание нового предрепорта
+              Create new report
             </h4>
             <form action="" class="cabinet__create-report-form">
               <div class="cabinet__report-time">
-                <p class="cabinet__create-report-title">Планируется работать<span>*</span></p>
+                <p class="cabinet__create-report-title">Planned working hours<span>*</span></p>
                 <div class="cabinet__create-input-wrapper">
-                  <input type="number" placeholder="чч:мм" min="0"
+                  <input type="number" placeholder="hh:mm" min="0" style="width:100px;"
                     class="common-input cabinet__create-report_input prereport-working-hours">
                 </div>
               </div>
               <div class="cabinet__report-tasks cabinet__prereport-tasks">
-                <p class="cabinet__create-report-title">Планируемые задачи<span>*</span></p>
+                <p class="cabinet__create-report-title">Planned tasks<span>*</span></p>
                 <div class="cabinet__create-input-wrapper prereport-task-wrapper">
-                  <input type="text" placeholder="1. Введите задачу"
+                  <input type="text" placeholder="1. Enter your task"
                     class="common-input cabinet__create-report_input prereport-task">
                 </div>
               </div>
               <div class="cabinet__create-report-btn-wrapper">
                 <button class="cabinet__create-report_button">
-                  Отправить
+                  Send
                   <img src="/assets/img/next-icon.svg" alt="">
                 </button>
               </div>
@@ -84,7 +84,7 @@
         </div>
         <div class="cabinet__content-column">
           <div class="cabinet__advice">
-            <h3 class="cabinet__advice-title">Полезный </br> совет</h3>
+            <h3 class="cabinet__advice-title">Usefull </br> advice</h3>
             <div class="cabinet__advice-description">
               {{#each tip.data}}
                 <p class="cabinet__advice-description-item">{{this}}</p>
@@ -111,7 +111,7 @@
       .addEventListener('change', function (e) {
         taskContainer.insertAdjacentHTML('beforeend', `
           <div class="cabinet__create-input-wrapper prereport-task-wrapper">
-            <input type="text" placeholder="1. Введите задачу"
+            <input type="text" placeholder="1. Enter your task"
               class="common-input cabinet__create-report_input prereport-task">
           </div>
         `);

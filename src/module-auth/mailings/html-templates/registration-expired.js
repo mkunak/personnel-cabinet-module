@@ -8,7 +8,7 @@ module.exports = () => `
       <hr/>
       <p style="text-align: center;">
         <span style="font-size: 18px">Register page: 
-          <a href="${process.env.BASE_URL}/register">GS App</a>
+          <a href="${process.env.BASE_URL}/register">Personnel Cabinet</a>
         </span>
       </p>
     `;

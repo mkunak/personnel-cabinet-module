@@ -2,7 +2,7 @@
   {{>login/sidebar}}
   <div class="main">
     <div class="register-2-step-container">
-      <h2 class="main__sub-title">Шаг 2 из 3</h2>
+      <h2 class="main__sub-title">Step 2 / 3</h2>
       <h1 class="main__title">Подтверждение Email</h1>
       <p class="main__description">На Ваш адрес электронной почты было отправлено письмо с шестизначным кодом
         подтверждения. Откройте это письмо и впишите код в поле ниже. Если Вы не нашли письмо у себя в ящике,
@@ -11,11 +11,11 @@
       <form class="main__form" name="register-2-form">
         <div class="main__form-confirm-email ">
           <pre><input type="text" maxlength="6" name="confirmCode" id="user_register_form_confirm_code"/></pre>
-          <p class="main__form-err-message">Код введён неверно</p>
+          <p class="main__form-err-message">Wrong code</p>
         </div>
         <input type="hidden" name="_csrf" value="{{csrf}}" />
         <button class="main__form-current-btn further-btn">
-          Далее
+          Further
         </button>
         <p class="main__form-retry-send">Отправить ещё раз через <span class="count-seconds">56</span> секунд
         </p>

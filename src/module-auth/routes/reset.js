@@ -11,13 +11,15 @@ const newPswdConfirmMail = require("../mailings/new-password-confirm");
 const { User } = require("../models");
 
 const router = Router();
-const transporter = createTransport(sendgrid({
-  auth: { api_key: process.env.SENDGRID_API_KEY },
-}));
+const transporter = createTransport(
+  sendgrid({
+    auth: { api_key: process.env.SENDGRID_API_KEY },
+  }),
+);
 
 router.get("/", (req, res) => {
   res.render("pages/auth/reset", {
-    title: "GS App [Reset]",
+    title: "[Reset]",
     isReset: true,
     // isLoggedIn: JSON.stringify(req.session.isLoggedIn),
   });

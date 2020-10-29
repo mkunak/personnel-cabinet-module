@@ -3,38 +3,40 @@
   <div>
     <div class="sidebar__name">
       <div class="sidebar__icon-wrapper">
-        <img src="/assets/img/logo.svg" alt="">
+        <a href="/">
+          <img src="/assets/img/logo.svg" alt="">
+        </a>
       </div>
     </div>
     <ul class="sidebar__nav">
       <li class="sidebar__nav-item {{#if isUserDashboard}}active{{/if}}">
         <a href="/admin/user-dashboard/{{user._id}}">
           <img src="/assets/img/dashboard-icon.svg" alt="">
-          Дашборд
+          Dashboard
         </a>
       </li>
       <li class="sidebar__nav-item">
         <a href="#">
           <img src="/assets/img/projects-icon.svg" alt="">
-          Мои проекты
+          My projects
         </a>
       </li>
       <li class="sidebar__nav-item">
         <a href="#">
           <img src="/assets/img/star-icon.svg" alt="">
-          Общий рейтинг
+          Overall rating
         </a>
       </li>
       <li class="sidebar__nav-item {{#if isUserProfile}}active{{/if}}">
         <a href="/admin/user-profile/{{user._id}}">
           <img src="/assets/img/profile-icon.svg" alt="">
-          Мой профиль
+          My profile
         </a>
       </li>
       <li class="sidebar__nav-item {{#if isUserReports}}active{{/if}}">
         <a href="/admin/user-prereports/{{user._id}}">
           <img src="/assets/img/reports-icon.svg" alt="">
-          Мои отчеты
+          My reports
         </a>
       </li>
     </ul>
@@ -44,20 +46,20 @@
     к блоку sidebar__quest класс active -->
     <div class="sidebar__quest exit-window">
       <p class="sidebar__quest-title">
-        Вы хотите выйти?
+        Do you want to leave?
       </p>
       <div class="sidebar__quest-buttons">
         <button class="sidebar__quest-cancel">
-          Отмена
+          Cancel
         </button>
         <button class="sidebar__quest-agree">
-          Да
+          Yes
         </button>
       </div>
     </div>
     <button class="sidebar__exit_button">
       <img src="/assets/img/exit-icon.svg" alt="">
-      Выйти из аккаунта
+      Sign out
     </button>
   </div>
 </aside>

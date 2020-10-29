@@ -44,7 +44,7 @@ router.get("/", (req, res) => {
   const { urlPrefixLanguage } = res.locals;
   const success = req.flash("success");
   res.render("pages/auth/register-step-1", {
-    title: "GS App [Register. Step 1]",
+    title: "[Register. Step 1]",
     isLoginRegister: true,
     urlPrefixLanguage,
     success,
@@ -135,7 +135,7 @@ router.get("/2", checkRegister2, (req, res) => {
   const { urlPrefixLanguage } = res.locals;
   const success = req.flash("success");
   res.render("pages/auth/register-step-2", {
-    title: "GS App [Register > Step 2]",
+    title: "[Register > Step 2]",
     isLoginRegister: true,
     success,
     urlPrefixLanguage,
@@ -218,7 +218,7 @@ router.get("/3", checkRegister3, (req, res) => {
   const { urlPrefixLanguage } = res.locals;
   const success = req.flash("success");
   res.render("pages/auth/register-step-3", {
-    title: "GS App [Register > Step 3]",
+    title: "[Register > Step 3]",
     isLoginRegister: true,
     success,
     urlPrefixLanguage,

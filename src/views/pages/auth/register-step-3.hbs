@@ -2,36 +2,36 @@
   {{>login/sidebar}}
   <div class="main">
     <div class="register-3-step-container">
-      <h2 class="main__sub-title">Шаг 3 из 3</h2>
-      <h1 class="main__title">Заполнение данных</h1>
+      <h2 class="main__sub-title">Step 3 / 3</h2>
+      <h1 class="main__title">Details</h1>
       <!-- Чтобы отображались ошибки на всех инпутах, нужно добавить к блоку с классом main__form класс error. 
       Для того, чтобы ошибка была на одном инпуте нужно добавить к блоку с классом main__form-item класс error -->
       {{!-- <form class="main__form" method="POST" action="/register/3"> --}}
       <form class="main__form" name="register-3-form">
         <div class="main__form-inputs-row">
           <div class="main__form-item main__form-name">
-            <p class="main__form-sign">Имя</p>
+            <p class="main__form-sign">Name</p>
             <input type="text" name="firstName" id="user_register_form_firstname" />
           </div>
           <div class="main__form-item main__form-surname">
-            <p class="main__form-sign">Фамилия</p>
+            <p class="main__form-sign">Second name</p>
             <input type="text" name="lastName" id="user_register_form_lastname" />
           </div>
         </div>
         <div class="main__form-inputs-row">
           <div class="main__form-item register-form-birthday">
-            <p class="main__form-sign">Дата рождения</p>
+            <p class="main__form-sign">Birthday</p>
             <input class="common-input" type="date" name="birthday" id="user_register_form_birthday" />
           </div>
           <div class="main__form-item register-form-phone">
-            <p class="main__form-sign">Телефон</p>
+            <p class="main__form-sign">Phone</p>
             <input class="common-input" placeholder="+380 (50) 123-45-67" type="text" name="phone"
               id="user_register_form_phone" />
           </div>
         </div>
         <div class="main__form-inputs-row">
           <div class="main__form-positions">
-            <h3 class="main__form-subtitle">Должность</h3>
+            <h3 class="main__form-subtitle">Position</h3>
             <div class="main__form-positions-items">
               <div class="main__form-positions-item">
                 Менеджер
@@ -74,9 +74,9 @@
         <input type="hidden" name="_csrf" value="{{csrf}}" />
         <div class="main__form-button-wrapper">
           <button class="main__form-current-btn register-three-btn">
-            Далее
+            Further
           </button>
-          <p class="main__form-err-message">Заполните все поля</p>
+          <p class="main__form-err-message">Fill in all the fields</p>
         </div>
       </form>
     </div>

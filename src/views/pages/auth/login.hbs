@@ -3,23 +3,23 @@
   {{>login/sidebar}}
   <div class="main">
     <div class="login-container">
-      <h1 class="main__title">Вход в аккаунт</h1>
+      <h1 class="main__title">Login to your account</h1>
       <!-- Чтобы отображались ошибки, нужно добавить к блоку с классом main__form класс error -->
       {{!-- <form class="main__form" method="POST" action="/login"> --}}
       <form class="main__form" name="login-form">
         <div class="main__form-item login-form-email">
-          <p class="main__form-sign">Электронная почта</p>
-          <input class="common-input" name="email" type="email" placeholder="Введите адрес эл. почты"
+          <p class="main__form-sign">Email</p>
+          <input class="common-input" name="email" type="email" placeholder="Enter email"
             id="user_signin_form_email" />
         </div>
         <div class="main__form-item login-form-password" id="user_login_form_password">
-          <p class="main__form-sign">Пароль</p>
-          <input class="common-input password-input" name="password" type="password" placeholder="Введите пароль"
+          <p class="main__form-sign">Password</p>
+          <input class="common-input password-input" name="password" type="password" placeholder="Enter password"
             id="user_signin_form_password" />
           <button type="button" class="main__form-item_button eye-btn">
             <img src="/assets/img/eye.svg" alt="eye">
           </button>
-          <p class="main__form-err-message">Неверный пароль</p>
+          <p class="main__form-err-message">Wrong password</p>
         </div>
         <div class="main__form-links">
           <div class="main__form-remember">
@@ -27,16 +27,16 @@
               <input id="remember" type="checkbox">
               <label for="remember"></label>
             </div>
-            Запомнить меня
+            Remember me
           </div>
-          <a href="/reset" class="main__form-forgot">Забыли пароль?</a>
+          <a href="/reset" class="main__form-forgot">Forget password?</a>
         </div>
         <input type="hidden" name="_csrf" value="{{csrf}}" />
         <div class="main__form-buttons">
           <button class="main__form-current-btn signin-btn">
-            Вход
+            Login
           </button>
-          <a href="/register" class="main__form-other-link">Регистрация</a>
+          <a href="/register" class="main__form-other-link">Registration</a>
         </div>
       </form>
     </div>
