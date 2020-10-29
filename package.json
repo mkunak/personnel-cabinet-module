@@ -1,7 +1,7 @@
 {
-  "name": "personal-cabinet",
+  "name": "personnel-cabinet",
   "version": "1.0.0",
-  "description": "Personal cabinet",
+  "description": "Personnel cabinet",
   "main": "src/app.js",
   "scripts": {
     "start": "node src/app.js",
