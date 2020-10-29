@@ -1,0 +1,279 @@
+<section class="login">
+  {{>login/sidebar}}
+  <div class="main">
+    <div class="register-3-step-container">
+      <h2 class="main__sub-title">Шаг 3 из 3</h2>
+      <h1 class="main__title">Заполнение данных</h1>
+      <!-- Чтобы отображались ошибки на всех инпутах, нужно добавить к блоку с классом main__form класс error. 
+      Для того, чтобы ошибка была на одном инпуте нужно добавить к блоку с классом main__form-item класс error -->
+      {{!-- <form class="main__form" method="POST" action="/register/3"> --}}
+      <form class="main__form" name="register-3-form">
+        <div class="main__form-inputs-row">
+          <div class="main__form-item main__form-name">
+            <p class="main__form-sign">Имя</p>
+            <input type="text" name="firstName" id="user_register_form_firstname" />
+          </div>
+          <div class="main__form-item main__form-surname">
+            <p class="main__form-sign">Фамилия</p>
+            <input type="text" name="lastName" id="user_register_form_lastname" />
+          </div>
+        </div>
+        <div class="main__form-inputs-row">
+          <div class="main__form-item register-form-birthday">
+            <p class="main__form-sign">Дата рождения</p>
+            <input class="common-input" type="date" name="birthday" id="user_register_form_birthday" />
+          </div>
+          <div class="main__form-item register-form-phone">
+            <p class="main__form-sign">Телефон</p>
+            <input class="common-input" placeholder="+380 (50) 123-45-67" type="text" name="phone"
+              id="user_register_form_phone" />
+          </div>
+        </div>
+        <div class="main__form-inputs-row">
+          <div class="main__form-positions">
+            <h3 class="main__form-subtitle">Должность</h3>
+            <div class="main__form-positions-items">
+              <div class="main__form-positions-item">
+                Менеджер
+              </div>
+              <div class="main__form-positions-item">
+                Продажник
+              </div>
+              <div class="main__form-positions-item">
+                HR
+              </div>
+              <div class="main__form-positions-item">
+                Программист
+              </div>
+              <div class="main__form-positions-item">
+                Дизайнер
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="main__form-inputs-row">
+          <div class="main__form-item register-form-telegram">
+            <p class="main__form-sign">Telegram</p>
+            <input class="common-input" placeholder="@nickname" type="text" name="telegram"
+              id="user_register_form_telegram" />
+          </div>
+          <div class="main__form-item register-form-skype">
+            <p class="main__form-sign">Skype</p>
+            <input class="common-input" placeholder="@nickname" type="text" name="skype"
+              id="user_register_form_skype" />
+          </div>
+        </div>
+        <div class="main__form-inputs-row">
+          <div class="main__form-item register-form-discort">
+            <p class="main__form-sign">Discord</p>
+            <input class="common-input" placeholder="Ivan Ivanov#1234" type="text" name="discort"
+              id="user_register_form_discort" />
+          </div>
+        </div>
+        <input type="hidden" name="position" value="" />
+        <input type="hidden" name="_csrf" value="{{csrf}}" />
+        <div class="main__form-button-wrapper">
+          <button class="main__form-current-btn register-three-btn">
+            Далее
+          </button>
+          <p class="main__form-err-message">Заполните все поля</p>
+        </div>
+      </form>
+    </div>
+  </div>
+</section>
+<script src="/js/positions.js"></script>
+<script>
+  const registerNameContainer = document.querySelector('.main__form-item.main__form-name');
+  const registerSurnameContainer = document.querySelector('.main__form-item.main__form-surname');
+  const registerBirthdayContainer = document.querySelector('.main__form-item.register-form-birthday');
+  const registerPhoneContainer = document.querySelector('.main__form-item.register-form-phone');
+  const registerTelegramContainer = document.querySelector('.main__form-item.register-form-telegram');
+  const registerSkypeContainer = document.querySelector('.main__form-item.register-form-skype');
+  const registerDiscortContainer = document.querySelector('.main__form-item.register-form-discort');
+
+  document.getElementById('user_register_form_firstname').addEventListener('change', function () {
+    const regex = /^[a-zA-Z]{1,}$/;
+    if (!regex.test(this.value)) {
+      registerNameContainer.classList.add("error");
+    } else {
+      registerNameContainer.classList.remove("error");
+    }
+  });
+
+  document.getElementById('user_register_form_lastname').addEventListener('change', function () {
+    const regex = /^[a-zA-Z]{1,}$/;
+    if (!regex.test(this.value)) {
+      registerSurnameContainer.classList.add("error");
+    } else {
+      registerSurnameContainer.classList.remove("error");
+    }
+  });
+
+  document.getElementById('user_register_form_birthday').addEventListener('change', function () {
+    const regex = /([12]\d{3}-(0[1-9]|1[0-2])-(0[1-9]|[12]\d|3[01]))/;
+    if (!regex.test(this.value)) {
+      console.log(this.value);
+      registerBirthdayContainer.classList.add("error");
+    } else {
+      registerBirthdayContainer.classList.remove("error");
+    }
+  });
+
+  document.getElementById('user_register_form_phone').addEventListener('change', function () {
+    const regex = /^\+?[0-9]{10,}$/;
+    if (!regex.test(this.value)) {
+      registerPhoneContainer.classList.add("error");
+    } else {
+      registerPhoneContainer.classList.remove("error");
+    }
+  });
+
+  document.getElementById('user_register_form_telegram').addEventListener('change', function () {
+    const regex = /^.{2,}$/;
+    if (!regex.test(this.value)) {
+      registerTelegramContainer.classList.add("error");
+    } else {
+      registerTelegramContainer.classList.remove("error");
+    }
+  });
+
+  document.getElementById('user_register_form_skype').addEventListener('change', function () {
+    const regex = /^.{2,}$/;
+    if (!regex.test(this.value)) {
+      registerSkypeContainer.classList.add("error");
+    } else {
+      registerSkypeContainer.classList.remove("error");
+    }
+  });
+
+  document.getElementById('user_register_form_discort').addEventListener('change', function () {
+    const regex = /^.{2,}$/;
+    if (!regex.test(this.value)) {
+      registerDiscortContainer.classList.add("error");
+    } else {
+      registerDiscortContainer.classList.remove("error");
+    }
+  });
+
+  const register3Form = document.querySelector('.register-3-step-container form');
+  register3Form.addEventListener('submit', isFilled);
+  register3Form.addEventListener('submit', isValid);
+
+  document.querySelector('.main__form-current-btn.register-three-btn').addEventListener("click", function (e) {
+    e.preventDefault();
+
+    if (!isFilled()) return;
+    if (!isValid()) return;
+
+    const firstName = document.getElementById('user_register_form_firstname').value;
+    const lastName = document.getElementById('user_register_form_lastname').value;
+    const birthday = document.getElementById('user_register_form_birthday').value;
+    const phone = document.getElementById('user_register_form_phone').value;
+    const telegram = document.getElementById('user_register_form_telegram').value;
+    const skype = document.getElementById('user_register_form_skype').value;
+    const discort = document.getElementById('user_register_form_discort').value;
+
+    let position = '';
+    const positions = document.querySelectorAll('.main__form-positions-items .main__form-positions-item');
+    positions.forEach((node) => {
+      if (node.classList.contains('active')) {
+        position = node.textContent.trim();
+      }
+    });
+
+    const formData = new FormData();
+    formData.append('firstName', firstName);
+    formData.append('lastName', lastName);
+    formData.append('birthday', birthday);
+    formData.append('phone', phone);
+    formData.append('position', position);
+    formData.append('telegram', telegram);
+    formData.append('skype', skype);
+    formData.append('discort', discort);
+
+    const csrf = '{{csrf}}';
+
+    axios.defaults.headers.post['X-CSRF-Token'] = csrf;
+    axios.defaults.headers.post['Content-Type'] = 'multipart/form-data';
+    axios.post(`/register/3`, formData)
+      .then(function (response) {
+        const { message, messageType } = response.data;
+
+        console.log('>>> response', response);
+
+        const onAfterClose = (messageType) => {
+          if (messageType === 'success') {
+            return () => window.location.href = '/login';
+          }
+          if (messageType === 'warning') {
+            return () => window.location.href = '/register';
+          }
+          return () => window.location.href;
+        }
+
+        Swal.fire({
+          title: `${messageType.toUpperCase()}!`,
+          text: message,
+          icon: messageType,
+          confirmButtonText: 'Ok',
+          onAfterClose: onAfterClose(messageType),
+        });
+      })
+      .catch(function (error) {
+        console.log(error);
+      });
+  })
+
+  function isFilled() {
+    const a = document.forms["register-3-form"]["firstName"].value;
+    const b = document.forms["register-3-form"]["lastName"].value;
+    const c = document.forms["register-3-form"]["birthday"].value;
+    const d = document.forms["register-3-form"]["phone"].value;
+    const e = document.forms["register-3-form"]["telegram"].value;
+    const f = document.forms["register-3-form"]["skype"].value;
+    const g = document.forms["register-3-form"]["discort"].value;
+
+    if (a == null || a == "") registerNameContainer.classList.add("error");
+    if (b == null || b == "") registerSurnameContainer.classList.add("error");
+    if (c == null || c == "") registerBirthdayContainer.classList.add("error");
+    if (d == null || d == "") registerPhoneContainer.classList.add("error");
+    if (e == null || e == "") registerTelegramContainer.classList.add("error");
+    if (f == null || f == "") registerSkypeContainer.classList.add("error");
+    if (g == null || g == "") registerDiscortContainer.classList.add("error");
+
+    if (
+      a == null || a == "",
+      b == null || b == "",
+      c == null || c == "",
+      d == null || d == "",
+      e == null || e == "",
+      f == null || f == "",
+      g == null || g == ""
+    ) {
+      Swal.fire({
+        title: `WARNING!`,
+        text: "All fields should be filled",
+        icon: 'warning',
+        confirmButtonText: 'Ok',
+      });
+      return false;
+    }
+    return true;
+  }
+
+  function isValid() {
+    const loginForm = document.querySelector('form.main__form');
+    const notValid = !!loginForm.querySelector('.error');
+    if (notValid) {
+      Swal.fire({
+        title: `WARNING!`,
+        text: "All fields should be valid",
+        icon: 'warning',
+        confirmButtonText: 'Ok',
+      });
+      return false;
+    }
+    return true;
+  }
+</script>

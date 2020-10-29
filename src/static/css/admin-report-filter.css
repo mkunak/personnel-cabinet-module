@@ -1,0 +1,25 @@
+.filter {
+  border-radius: 5px;
+  border: 3px solid black;
+  width: 20vw;
+  position: fixed;
+  z-index: 1;
+  top: 15vh;
+  left: 3vw;
+  background: #eeeeee;
+  overflow-x: hidden;
+  padding: 8px 4px;
+}
+
+.filter__header{
+  text-align: center;
+  font-weight: 700;
+}
+
+.filter__item {
+  margin-top: 2vh;
+  margin-bottom: 2vh;
+
+  display: flex;
+  flex-direction: column;
+}

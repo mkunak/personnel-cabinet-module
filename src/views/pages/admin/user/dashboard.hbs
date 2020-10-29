@@ -1,0 +1,165 @@
+<header class="header header-cabinet">
+  <div class="header__logo">
+    <img src="/assets/img/logo.svg" alt="">
+  </div>
+  <label for="burger" class="header__burger">
+    <span></span>
+  </label>
+</header>
+<section class="cabinet">
+  <input class="cabinet__check" id="burger" type="checkbox">
+  {{>admin/sidebar}}
+  <div class="cabinet__content">
+    <div class="cabinet-container">
+      <div class="cabinet__content-wrapper">
+        <div class="cabinet__content-column">
+          <div class="cabinet__user">
+            {{#if user.avatar}}
+              <img src="{{user.avatar}}" width="70" height="70" alt="avatar" class="cabinet__user_img">
+            {{else}}
+              <img src="/assets/img/user-photo.svg" alt="avatar" class="cabinet__user_img">
+            {{/if}}
+            <div class="cabinet__user-info">
+              <p class="cabinet__user-name">{{user.firstName}}</p>
+              <p class="cabinet__user-position">{{user.position}}</p>
+            </div>
+          </div>
+          <div class="cabinet__tasks">
+            <h4 class="cabinet__block-title">Ваши задачи</h4>
+            <div class="cabinet__tasks-block tasks">
+              <div class="cabinet__tasks-name">
+                <div class="cabinet__tasks-circle"></div>
+                Задачи (Todo)
+              </div>
+              <div class="cabinet__tasks-items">
+                {{#each report.tasks.todo}}
+                  <p class="cabinet__tasks-item">{{this}}</p>
+                {{/each}}
+              </div>
+            </div>
+            <div class="cabinet__tasks-block in-work">
+              <div class="cabinet__tasks-name">
+                <div class="cabinet__tasks-circle"></div>
+                В работе (In Progress)
+              </div>
+              <div class="cabinet__tasks-items">
+                {{#each report.tasks.inProgress}}
+                  <p class="cabinet__tasks-item">{{this}}</p>
+                {{/each}}
+              </div>
+            </div>
+            <div class="cabinet__tasks-block on-check">
+              <div class="cabinet__tasks-name">
+                <div class="cabinet__tasks-circle"></div>
+                На проверке (On Check)
+              </div>
+              <div class="cabinet__tasks-items">
+                {{#each report.tasks.onCheck}}
+                  <p class="cabinet__tasks-item">{{this}}</p>
+                {{/each}}
+              </div>
+            </div>
+            <div class="cabinet__tasks-block ready">
+              <div class="cabinet__tasks-name">
+                <div class="cabinet__tasks-circle"></div>
+                Готово (Done)
+              </div>
+              <div class="cabinet__tasks-items">
+                {{#each report.tasks.done}}
+                  <p class="cabinet__tasks-item">{{this}}</p>
+                {{/each}}
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="cabinet__content-column">
+          <div class="cabinet__rating">
+            <h4 class="cabinet__block-title">Ваша позиция в рейтинге</h4>
+            {{#each user.ratings}}
+              <div class="cabinet__rating-count">
+                {{#if @last}}{{this}}{{/if}}
+                {{#if @root.isRatingPositive}}
+                  <img src="/assets/img/arrow-up.svg" alt="arr-up">
+                {{else}}
+                  <img src="/assets/img/arrow-down.svg" alt="arr-down">
+                {{/if}}
+              </div>
+            {{/each}}
+          </div>
+          <div class="cabinet__scores">
+            <h4 class="cabinet__block-title">Количество Ваших поинтов</h4>
+            <div class="cabinet__scores-items">
+              <div class="cabinet__scores-item">
+                <div class="cabinet__score-circle"></div>
+                {{user.points.green}}
+              </div>
+              <div class="cabinet__scores-item">
+                <div class="cabinet__score-circle"></div>
+                {{user.points.red}}
+              </div>
+            </div>
+          </div>
+          <div class="cabinet__news">
+            <h4 class="cabinet__block-title">Закреплённая новость</h4>
+            <ul class="cabinet__news-items">
+              {{#each pinnedNews.data}}
+                <li class="cabinet__news-item">{{this}}</li>
+              {{/each}}
+            </ul>
+            <p class="cabinet__news-time">{{pinnedNews.created}}</p>
+          </div>
+        </div>
+        <div class="cabinet__content-column">
+          <div class="cabinet__advice">
+            <h3 class="cabinet__advice-title">Полезный </br> совет</h3>
+            <div class="cabinet__advice-description">
+              {{#each tip.data}}
+                <p class="cabinet__advice-description-item">{{this}}</p>
+              {{/each}}
+            </div>
+            <input type="hidden" name="tipId" value="{{tip.id}}" class="current-tip-id" />
+            <div class="cabinet__btn-wrapper">
+              <button class="cabinet__button new-tip-btn">
+                <img src="/assets/img/next-icon.svg" alt="">
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+<script src="/js/exit-window.js"></script>
+<script>
+  const newTipBtn = document.querySelector('.cabinet__button.new-tip-btn');
+
+  newTipBtn.addEventListener("click", function (e) {
+    e.preventDefault();
+
+    const csrf = '{{csrf}}';
+    const tipId = document.querySelector('.current-tip-id');
+
+    const formData = new FormData();
+    formData.append('tipId', tipId.value);
+
+    axios.defaults.headers.post['X-CSRF-Token'] = csrf;
+    axios.defaults.headers.post['Content-Type'] = 'multipart/form-data';
+    axios.post(`/cabinet/new-tip`, formData)
+      .then(function (response) {
+        const { tip } = response.data;
+
+        const tipContainer = document.querySelector('.cabinet__advice-description');
+
+        const template = tip.data.map((tipData) => {
+          return `<p class="cabinet__advice-description-item">${tipData}</p>`;
+        }).join('');
+
+        tipContainer.innerHTML = template;
+
+        tipId.setAttribute('value', tip.id);
+      })
+      .catch(function (error) {
+        console.log(error);
+      });
+  });
+</script>

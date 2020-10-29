@@ -1,0 +1,318 @@
+<header class="header header-cabinet">
+  <div class="header__logo">
+    <img src="/assets/img/logo.svg" alt="">
+  </div>
+  <label for="burger" class="header__burger">
+    <span></span>
+  </label>
+</header>
+<section class="cabinet">
+  <input class="cabinet__check" id="burger" type="checkbox">
+  {{>cabinet/sidebar}}
+  <div class="cabinet__content">
+    <div class="cabinet-container">
+      <div class="cabinet__content-wrapper">
+        <div class="cabinet__content-column">
+          <div class="cabinet__user">
+            <div class="cabinet__user-img-wrapper">
+              {{#if user.avatar}}
+                <img src="{{user.avatar}}" width="70" height="70" alt="avatar" class="cabinet__user_img">
+              {{else}}
+                <img src="/assets/img/user-photo.svg" alt="avatar" class="cabinet__user_img">
+              {{/if}}
+              <input type="file" name="avatar" id="profile-avatar" class="profile-avatar" hidden="hidden" />
+              <button class="cabinet__user-edit-photo">
+                <img src="/assets/img/camera.svg" alt="camera">
+              </button>
+            </div>
+            <div class="cabinet__user-info">
+              <p class="cabinet__user-name">{{user.firstName}}</p>
+              <p class="cabinet__user-position">{{user.position}}</p>
+            </div>
+          </div>
+        </div>
+        <div class="cabinet__content-column">
+          <div class="cabinet__scores">
+            <h4 class="cabinet__block-title">Количество Ваших поинтов</h4>
+            <div class="cabinet__scores-items">
+              <div class="cabinet__scores-item">
+                <div class="cabinet__score-circle"></div>
+                {{user.points.green}}
+              </div>
+              <div class="cabinet__scores-item">
+                <div class="cabinet__score-circle"></div>
+                {{user.points.red}}
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="cabinet__content-column">
+          <div class="cabinet__current-rate">
+            <h4 class="cabinet__block-title">
+              Ваш текущий рейт
+            </h4>
+            <p class="cabinet__current-value">
+              {{#each user.rates}}
+                {{#if @last}}
+                  <span class="cabinet__current-price">${{this}}</span>
+                {{/if}}
+              {{/each}}
+              в час
+            </p>
+          </div>
+        </div>
+      </div>
+      <!-- Чтобы отображались ошибки на всех инпутах, нужно добавить к блоку с классами cabinet__form класс error. 
+                Для того, чтобы ошибка была на одном инпуте нужно добавить к блоку с классом main__form-item класс error -->
+      <form action="" class="cabinet__form profile-data">
+        <div class="cabinet__content-column">
+          <h3 class="cabinet__form_h3">Сведения об аккаунте</h3>
+          <div class="main__form-item">
+            <p class="main__form-sign">Имя</p>
+            <input class="common-input profile-data-other profile-firstname" type="text" placeholder="Имя"
+              value="{{user.firstName}}" disabled />
+          </div>
+          <div class="main__form-item">
+            <p class="main__form-sign">Электронная почта</p>
+            <input class="common-input profile-data-other profile-email" type="email" placeholder="Электронная почта"
+              value="{{user.email}}" disabled />
+          </div>
+          <div class="main__form-inputs-row">
+            <div class="main__form-item">
+              <p class="main__form-sign">День рождения</p>
+              <input class="common-input profile-data-other profile-birthday" type="date" value="{{user.birthday}}"
+                disabled />
+            </div>
+            <div class="main__form-item">
+              <p class="main__form-sign">Номер телефона</p>
+              <input class="common-input profile-data-other profile-phone" type="text" placeholder="Номер телефона"
+                value="{{user.phone}}" disabled />
+            </div>
+          </div>
+          <div class="main__form-positions">
+            <h3 class="main__form-subtitle">Должность</h3>
+            <div class="main__form-positions-items profile-position-list">
+              {{#each positions}}
+                {{#if isActive}}
+                  <div class="main__form-positions-item profile-position-item active">{{position}}</div>
+                {{else}}
+                  <div class="main__form-positions-item profile-position-item">{{position}}</div>
+                {{/if}}
+              {{/each}}
+            </div>
+          </div>
+        </div>
+        <div class="cabinet__content-column change-password">
+          <h3 class="cabinet__form_h3">Смена пароля</h3>
+          <div class="main__form-item">
+            <p class="main__form-sign">Старый пароль</p>
+            <input class="common-input old-password" name="oldPassword" type="password"
+              placeholder="Введите старый пароль" />
+          </div>
+          <div class="main__form-item">
+            <p class="main__form-sign">Новый пароль</p>
+            <input class="common-input new-password" name="newPassword" type="password"
+              placeholder="Введите новый пароль">
+          </div>
+          <div class="main__form-item">
+            <p class="main__form-sign">Повтор нового пароля</p>
+            <input class="common-input new-password-repeat" name="newPasswordRepeat" type="password"
+              placeholder="Повторите новый пароль">
+          </div>
+          <div class="cabinet__form-change-wrapper">
+            <button type="button" class="cabinet__form-change-password">
+              Изменить пароль
+            </button>
+          </div>
+          <div class="cabinet__form-change-wrapper">
+            <button type="button" class="cabinet__form-edit-profile">
+              Редактировать данные
+            </button>
+          </div>
+          <div class="cabinet__form-change-wrapper">
+            <button type="button" class="cabinet__form-change-personal-data" disabled>
+              Запросить изменение персональных данных
+            </button>
+          </div>
+        </div>
+        <div class="cabinet__content-column">
+          <h3 class="cabinet__form_h3">Ссылки для связи</h3>
+          <div class="main__form-item">
+            <p class="main__form-sign">Telegram</p>
+            <input class="common-input profile-data-other profile-telegram" type="text" placeholder="t.me/ivshe"
+              value="{{user.connections.telegram}}" disabled />
+          </div>
+          <div class="main__form-item">
+            <p class="main__form-sign">Discord</p>
+            <input class="common-input profile-data-other profile-discort" text="text" placeholder="Ivan Ivanov#1234"
+              value="{{user.connections.discort}}" disabled />
+          </div>
+          <div class="main__form-item">
+            <p class="main__form-sign">Skype</p>
+            <input class="common-input profile-data-other profile-skype" type="text" placeholder="@nickname"
+              value="{{user.connections.skype}}" disabled />
+          </div>
+        </div>
+      </form>
+    </div>
+  </div>
+</section>
+<script src="/js/positions.js"></script>
+<script src="/js/exit-window.js"></script>
+<script src="/js/refresh-profile-data.js"></script>
+<script>
+  const editProfileBtn = document.querySelector('button.cabinet__form-edit-profile');
+
+  editProfileBtn.addEventListener('click', function (e) {
+    document.querySelector('input.profile-firstname').disabled = false;
+    document.querySelector('input.profile-email').disabled = false;
+    document.querySelector('input.profile-birthday').disabled = false;
+    document.querySelector('input.profile-phone').disabled = false;
+    document.querySelector('input.profile-telegram').disabled = false;
+    document.querySelector('input.profile-discort').disabled = false;
+    document.querySelector('input.profile-skype').disabled = false;
+    document.querySelector('button.cabinet__form-change-personal-data').disabled = false;
+
+    Swal.fire({
+      title: 'SUCCESS',
+      text: 'Now you can edit your personal information',
+      icon: 'success',
+      confirmButtonText: 'Ok',
+    });
+  });
+</script>
+<script>
+  const positionList = document.querySelector('.profile-position-list');
+
+  const formData = new FormData();
+
+  positionList.addEventListener("click", function (e) {
+    e.preventDefault();
+    if (e.target.matches('.profile-position-item.active')) {
+      formData.append('position', e.target.innerText.trim());
+    }
+  });
+
+  const changePersonalDataBtn = document.querySelector('button.cabinet__form-change-personal-data');
+
+  changePersonalDataBtn.addEventListener('click', function (e) {
+    const firstNameInput = document.querySelector('input.profile-firstname');
+    const emailInput = document.querySelector('input.profile-email');
+    const birthdayInput = document.querySelector('input.profile-birthday');
+    const phoneInput = document.querySelector('input.profile-phone');
+    const telegramInput = document.querySelector('input.profile-telegram');
+    const discortInput = document.querySelector('input.profile-discort');
+    const skypeInput = document.querySelector('input.profile-skype');
+
+    formData.append('firstName', firstNameInput.value);
+    formData.append('email', emailInput.value);
+    formData.append('birthday', birthdayInput.value);
+    formData.append('phone', phoneInput.value);
+    formData.append('telegram', telegramInput.value);
+    formData.append('discort', discortInput.value);
+    formData.append('skype', skypeInput.value);
+
+    const csrf = '{{csrf}}';
+    axios.defaults.headers.post['X-CSRF-Token'] = csrf;
+    axios.defaults.headers.post['Content-Type'] = 'multipart/form-data';
+    axios
+      .post(`/cabinet/profile/update`, formData)
+      .then(function (response) {
+        const { message, messageType } = response.data;
+
+        Swal.fire({
+          title: `${messageType.toUpperCase()}!`,
+          text: message,
+          icon: messageType,
+          confirmButtonText: 'Ok',
+        });
+      })
+      .catch(function (error) {
+        console.log(error);
+      });
+  });
+
+</script>
+<script>
+  const avatarChangeBtn = document.querySelector('.cabinet__user-edit-photo');
+  const avatarChangeInput = document.querySelector('#profile-avatar');
+
+  avatarChangeBtn.addEventListener("click", function (e) {
+    avatarChangeInput.click();
+  });
+
+  avatarChangeInput.addEventListener("change", function (e) {
+    const csrf = '{{csrf}}';
+    const formData = new FormData();
+    formData.append("avatar", avatarChangeInput.files[0]);
+
+    axios.defaults.headers.post['X-CSRF-Token'] = csrf;
+    axios.defaults.headers.post['Content-Type'] = 'multipart/form-data';
+    axios
+      .post(`/cabinet/profile/update-avatar`, formData)
+      .then(function (response) {
+        const { message, messageType } = response.data;
+
+        const onAfterClose = (messageType) => {
+          if (messageType === 'success') {
+            return () => window.location.reload();
+          }
+          return () => window.location.reload();
+        }
+
+        Swal.fire({
+          title: `${messageType.toUpperCase()}!`,
+          text: message,
+          icon: messageType,
+          confirmButtonText: 'Ok',
+          onAfterClose: onAfterClose(messageType),
+        });
+      })
+      .catch(function (error) {
+        console.log(error);
+      });
+  });
+</script>
+<script>
+  const changePasswordBtn = document.querySelector('button.cabinet__form-change-password');
+
+  changePasswordBtn.addEventListener("click", function (e) {
+    e.preventDefault();
+    const oldPassword = document.querySelector('.change-password .old-password').value;
+    const newPassword = document.querySelector('.change-password .new-password').value;
+    const newPasswordRepeat = document.querySelector('.change-password .new-password-repeat').value;
+
+    const csrf = '{{csrf}}';
+
+    const formData = new FormData();
+    formData.append('oldPassword', oldPassword);
+    formData.append('newPassword', newPassword);
+    formData.append('newPasswordRepeat', newPasswordRepeat);
+
+    axios.defaults.headers.post['X-CSRF-Token'] = csrf;
+    axios.defaults.headers.post['Content-Type'] = 'multipart/form-data';
+    axios
+      .post(`/new-password/from/profile`, formData)
+      .then(function (response) {
+        const { message, messageType } = response.data;
+
+        const onAfterClose = (messageType) => {
+          if (messageType === 'success') {
+            return () => window.location.reload();
+          }
+          return () => window.location.reload();
+        }
+
+        Swal.fire({
+          title: `${messageType.toUpperCase()}!`,
+          text: message,
+          icon: messageType,
+          confirmButtonText: 'Ok',
+          onAfterClose: onAfterClose(messageType),
+        });
+      })
+      .catch(function (error) {
+        console.log(error);
+      });
+  });
+</script>

@@ -1,0 +1,289 @@
+<section class="report-storage">
+  <div class="report-storage__header">
+    <h2>Report Storage</h2>
+    <h3 class="current-date">Current Date: <span>{{currentDate}}</span></h3>
+    <a href="/cabinet/reports">Back to reports</a>
+    <a href="/cabinet/prereports">Back to prereports</a>
+  </div>
+  <div class="report-storage__content">
+    <div class="prereport-list">
+      <div class="prereport-list__header">
+        <h3>Prereports</h3>
+      </div>
+      <div class="prereport-list__content">
+        {{#each prereports}}
+          <div class="prereport-item">
+            <h4 class="prereport-item__id">Prereport number: {{this.id}}</h4>
+            <h4 class="prereport-item__created">Created at: {{this.created}}</h4>
+            <h4 class="prereport-item__changed">Changed at: {{this.changed}}</h4>
+            {{#if @first}}
+              <input type="hidden" class="prereport_id" value="{{this._id}}" />
+            {{/if}}
+            <div class="prereport-item__hours">
+              <div class="prereport-item__hours_header">
+                <h4>Working hours</h4>
+              </div>
+              <div class="prereport-item__hours_content">
+                <div class="prereport-item__wrapper hours">
+                  {{#if @first}}
+                    <p class="task-item"><input type="number" class="first" value="{{this.workingHours}}" /></p>
+                  {{else}}
+                    <p class="task-item"><input type="number" value="{{this.workingHours}}" disabled /></p>
+                  {{/if}}
+                </div>
+              </div>
+            </div>
+            <div class="prereport-item__tasks">
+              <div class="prereport-item__tasks_header">
+                <h4>Tasks</h4>
+              </div>
+              <div class="prereport-item__tasks_content">
+                <div class="prereport-item__wrapper tasks-todo">
+                  <h3>Todo:</h3>
+                  {{#if @first}}
+                    {{#each this.tasks.todo}}
+                      <p class="task-item"><input class="first" value="{{this}}" /></p>
+                    {{/each}}
+                  {{else}}
+                    {{#each this.tasks.todo}}
+                      <p class="task-item"><input value="{{this}}" disabled /></p>
+                    {{/each}}
+                  {{/if}}
+                </div>
+              </div>
+            </div>
+            {{#if @first}}
+              <div class="prereport-item__edit-btn">
+                <button class="edit-button">Edit prereport</button>
+              </div>
+            {{/if}}
+          </div>
+        {{/each}}
+      </div>
+    </div>
+    <div class="report-list">
+      <div class="report-list__header">
+        <h3>Reports</h3>
+      </div>
+      <div class="report-list__content">
+        {{#each reports}}
+          <div class="report-item">
+            <h4 class="report-item__id">Report number: {{this.id}}</h4>
+            <h4 class="report-item__created">Created at: {{this.created}}</h4>
+            <h4 class="report-item__changed">Changed at: {{this.changed}}</h4>
+            {{#if @first}}
+              <input type="hidden" class="report_id" value="{{this._id}}" />
+            {{/if}}
+            <div class="report-item__hours">
+              <div class="report-item__hours_header">
+                <h4>Working hours</h4>
+              </div>
+              <div class="report-item__hours_content">
+                <div class="report-item__wrapper hours">
+                  {{#if @first}}
+                    <p class="task-item"><input type="number" class="first" value="{{this.workingHours}}" /></p>
+                  {{else}}
+                    <p class="task-item"><input type="number" value="{{this.workingHours}}" disabled /></p>
+                  {{/if}}
+                </div>
+              </div>
+            </div>
+            <div class="report-item__tasks">
+              <div class="report-item__tasks_header">
+                <h4>Tasks</h4>
+              </div>
+              <div class="report-item__tasks_content">
+                <div class="report-item__wrapper tasks-todo">
+                  <h3>Todo:</h3>
+                  {{#if @first}}
+                    {{#each this.tasks.todo}}
+                      <p class="task-item"><input class="first" value="{{this}}" /></p>
+                    {{/each}}
+                  {{else}}
+                    {{#each this.tasks.todo}}
+                      <p class="task-item"><input value="{{this}}" disabled /></p>
+                    {{/each}}
+                  {{/if}}
+                </div>
+                <div class="report-item__wrapper tasks-in-progress">
+                  <h3>In progress:</h3>
+                  {{#if @first}}
+                    {{#each this.tasks.inProgress}}
+                      <p class="task-item"><input class="first" value="{{this}}" /></p>
+                    {{/each}}
+                  {{else}}
+                    {{#each this.tasks.inProgress}}
+                      <p class="task-item"><input value="{{this}}" disabled /></p>
+                    {{/each}}
+                  {{/if}}
+                </div>
+                <div class="report-item__wrapper tasks-on-check">
+                  <h3>On check:</h3>
+                  {{#if @first}}
+                    {{#each this.tasks.onCheck}}
+                      <p class="task-item"><input class="first" value="{{this}}" /></p>
+                    {{/each}}
+                  {{else}}
+                    {{#each this.tasks.inProgress}}
+                      <p class="task-item"><input value="{{this}}" disabled /></p>
+                    {{/each}}
+                  {{/if}}
+                </div>
+                <div class="report-item__wrapper tasks-done">
+                  <h3>Done:</h3>
+                  {{#if @first}}
+                    {{#each this.tasks.done}}
+                      <p class="task-item"><input class="first" value="{{this}}" /></p>
+                    {{/each}}
+                  {{else}}
+                    {{#each this.tasks.inProgress}}
+                      <p class="task-item"><input value="{{this}}" disabled /></p>
+                    {{/each}}
+                  {{/if}}
+                </div>
+              </div>
+            </div>
+            <div class="report-item__links">
+              <div class="report-item__links_header">
+                <h4>Links</h4>
+              </div>
+              <div class="report-item__links_content">
+                <div class="report-item__wrapper links">
+                  {{#if @first}}
+                    {{#each this.links}}
+                      <p class="task-item"><input class="first" value="{{this}}" /></p>
+                    {{/each}}
+                  {{else}}
+                    {{#each this.links}}
+                      <p class="task-item"><input value="{{this}}" disabled /></p>
+                    {{/each}}
+                  {{/if}}
+                </div>
+              </div>
+            </div>
+            <div class="report-item__files">
+              <div class="report-item__files_header">
+                <h4>Files</h4>
+              </div>
+              <div class="report-item__files_content">
+                <div class="report-item__wrapper files">
+                  {{#if @first}}
+                    {{#each this.files}}
+                      <p class="task-item"><input class="first" value="{{this}}" disabled /></p>
+                    {{/each}}
+                  {{else}}
+                    {{#each this.files}}
+                      <p class="task-item"><input value="{{this}}" disabled /></p>
+                    {{/each}}
+                  {{/if}}
+                </div>
+              </div>
+            </div>
+            {{#if @first}}
+              <div class="report-item__edit-btn">
+                <button class="edit-button">Edit report</button>
+              </div>
+            {{/if}}
+          </div>
+        {{/each}}
+      </div>
+    </div>
+  </div>
+</section>
+<script>
+  const editReportBtn = document.querySelector('.report-item__edit-btn .edit-button');
+
+  editReportBtn.addEventListener("click", function (e) {
+    e.preventDefault();
+    const reportId = document.querySelector('.report_id').value;
+    const workingHours = document.querySelector('.report-item__wrapper.hours .first').value;
+    const todoTaskNodes = document.querySelectorAll('.report-item__wrapper.tasks-todo .first');
+    const todoTasks = [...todoTaskNodes].map((node) => node.value).filter((task) => task).join('***');
+    const inProgressTaskNodes = document.querySelectorAll('.report-item__wrapper.tasks-in-progress .first');
+    const inProgressTasks = [...inProgressTaskNodes].map((node) => node.value).filter((task) => task).join('***');
+    const onCheckTaskNodes = document.querySelectorAll('.report-item__wrapper.tasks-on-check .first');
+    const onCheckTasks = [...onCheckTaskNodes].map((node) => node.value).filter((task) => task).join('***');
+    const doneTaskNodes = document.querySelectorAll('.report-item__wrapper.tasks-done .first');
+    const doneTasks = [...doneTaskNodes].map((node) => node.value).filter((task) => task).join('***');
+    const linksNodes = document.querySelectorAll('.report-item__wrapper.links .first');
+    const links = [...linksNodes].map((node) => node.value).filter((task) => task).join('***');
+
+    const csrf = '{{csrf}}';
+    const formData = new FormData();
+    formData.append('workingHours', workingHours);
+    formData.append('todoTasks', todoTasks);
+    formData.append('inProgressTasks', inProgressTasks);
+    formData.append('onCheckTasks', onCheckTasks);
+    formData.append('doneTasks', doneTasks);
+    formData.append('links', links);
+    formData.append('reportId', reportId);
+
+    axios.defaults.headers.post['X-CSRF-Token'] = csrf;
+    axios.defaults.headers.post['Content-Type'] = 'multipart/form-data';
+    axios.post(`/cabinet/update-report`, formData)
+      .then(function (response) {
+        const { message, messageType } = response.data;
+
+        const onAfterClose = (messageType) => {
+          if (messageType === 'success') {
+            return () => window.location.reload();
+          }
+          return () => window.location.reload();
+        }
+
+        Swal.fire({
+          title: `${messageType.toUpperCase()}!`,
+          text: message,
+          icon: messageType,
+          confirmButtonText: 'Ok',
+          onAfterClose: onAfterClose(messageType),
+        });
+      })
+      .catch(function (error) {
+        console.log(error);
+      });
+  });
+</script>
+<script>
+  const editPrereportBtn = document.querySelector('.prereport-item__edit-btn .edit-button');
+
+  editPrereportBtn.addEventListener("click", function (e) {
+    e.preventDefault();
+    const prereportId = document.querySelector('.prereport_id').value;
+    const workingHours = document.querySelector('.prereport-item__wrapper.hours .first').value;
+    const todoTaskNodes = document.querySelectorAll('.prereport-item__wrapper.tasks-todo .first');
+    const todoTasks = [...todoTaskNodes].map((node) => node.value).filter((task) => task).join('***');
+
+    const csrf = '{{csrf}}';
+    const formData = new FormData();
+    formData.append('workingHours', workingHours);
+    formData.append('todoTasks', todoTasks);
+    formData.append('prereportId', prereportId);
+
+    axios.defaults.headers.post['X-CSRF-Token'] = csrf;
+    axios.defaults.headers.post['Content-Type'] = 'multipart/form-data';
+    axios
+      .post(`/cabinet/update-prereport`, formData)
+      .then(function (response) {
+        const { message, messageType } = response.data;
+
+        const onAfterClose = (messageType) => {
+          if (messageType === 'success') {
+            return () => window.location.reload();
+          }
+          return () => window.location.reload();
+        }
+
+        Swal.fire({
+          title: `${messageType.toUpperCase()}!`,
+          text: message,
+          icon: messageType,
+          confirmButtonText: 'Ok',
+          onAfterClose: onAfterClose(messageType),
+        });
+      })
+      .catch(function (error) {
+        console.log(error);
+      });
+  });
+</script>

@@ -1,0 +1,28 @@
+<aside class="filter">
+  <div class="filter__header">
+    <h5>Reports filter</h5>
+  </div>
+  <div class="filter__content">
+    <div class="filter__item">
+      <label for="id_admin_reports_filter_position_select">Positions</label>
+      <select class="positions" name="positions[]" id="id_admin_reports_filter_position_select">
+        <option selected disabled>Выберите профессию</option>
+        <option value="">All positions</option>
+        <option value="Программист">Программист</option>
+        <option value="Дизайнер">Дизайнер</option>
+        <option value="HR">HR</option>
+        <option value="Продажник">Продажник</option>
+        <option value="Менеджер">Менеджер</option>
+      </select>
+    </div>
+    <div class="filter__item">
+      <label for="id_admin_reports_filter_names_select">Names</label>
+      <select class="names" name="names[]" id="id_admin_reports_filter_names_select">
+        <option selected disabled>Выберите сначала профессию</option>
+      </select>
+    </div>
+    <div class="filter__item">
+      <a href="/admin/report-storage">Reset filter</a>
+    </div>
+  </div>
+</aside>

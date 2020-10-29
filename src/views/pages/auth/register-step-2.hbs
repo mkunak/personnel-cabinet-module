@@ -1,0 +1,109 @@
+<section class="login">
+  {{>login/sidebar}}
+  <div class="main">
+    <div class="register-2-step-container">
+      <h2 class="main__sub-title">Шаг 2 из 3</h2>
+      <h1 class="main__title">Подтверждение Email</h1>
+      <p class="main__description">На Ваш адрес электронной почты было отправлено письмо с шестизначным кодом
+        подтверждения. Откройте это письмо и впишите код в поле ниже. Если Вы не нашли письмо у себя в ящике,
+        проверьте папку «Спам».</p>
+      <!-- Чтобы отображалась ошибка, нужно добавить к блоку с классом main__form класс error. -->
+      <form class="main__form" name="register-2-form">
+        <div class="main__form-confirm-email ">
+          <pre><input type="text" maxlength="6" name="confirmCode" id="user_register_form_confirm_code"/></pre>
+          <p class="main__form-err-message">Код введён неверно</p>
+        </div>
+        <input type="hidden" name="_csrf" value="{{csrf}}" />
+        <button class="main__form-current-btn further-btn">
+          Далее
+        </button>
+        <p class="main__form-retry-send">Отправить ещё раз через <span class="count-seconds">56</span> секунд
+        </p>
+      </form>
+    </div>
+  </div>
+</section>
+<script>
+  const furtherBtn = document.querySelector('.main__form-current-btn.further-btn');
+
+  furtherBtn.addEventListener("click", function (e) {
+    e.preventDefault();
+
+    if (!isFilled()) return;
+    if (!isValid()) return;
+
+    const confirmCode = document.getElementById('user_register_form_confirm_code').value;
+
+    const formData = new FormData();
+    formData.append('confirmCode', confirmCode);
+    const csrf = '{{csrf}}';
+
+    axios.defaults.headers.post['X-CSRF-Token'] = csrf;
+    axios.defaults.headers.post['Content-Type'] = 'multipart/form-data';
+    axios.post(`/register/2`, formData)
+      .then(function (response) {
+        const { message, messageType } = response.data;
+
+        const onAfterClose = (messageType) => {
+          if (messageType === 'success') {
+            return () => window.location.href = '/register/3';
+          }
+          return () => window.location.href = '/register';
+        }
+
+        Swal.fire({
+          title: `${messageType.toUpperCase()}!`,
+          text: message,
+          icon: messageType,
+          confirmButtonText: 'Ok',
+          onAfterClose: onAfterClose(messageType),
+        });
+      })
+      .catch(function (error) {
+        console.log(error);
+      });
+  });
+
+  const confirmCodeContainer = document.querySelector('.main__form-confirm-email');
+
+  document.getElementById('user_register_form_confirm_code').addEventListener('change', function () {
+    const regex = /^[0-9]{6,6}$/;
+    if (!regex.test(this.value)) {
+      confirmCodeContainer.classList.add("error");
+    } else {
+      confirmCodeContainer.classList.remove("error");
+    }
+  });
+
+  function isFilled() {
+    const a = document.forms["register-2-form"]["confirmCode"].value;
+
+    if (a == null || a == "") confirmCodeContainer.classList.add("error");
+
+    if (a == null || a == "") {
+      Swal.fire({
+        title: `WARNING!`,
+        text: "All fields should be filled",
+        icon: 'warning',
+        confirmButtonText: 'Ok',
+      });
+      return false;
+    }
+    return true;
+  }
+
+  function isValid() {
+    const loginForm = document.querySelector('form.main__form');
+    const notValid = !!loginForm.querySelector('.error');
+    if (notValid) {
+      Swal.fire({
+        title: `WARNING!`,
+        text: "All fields should be valid",
+        icon: 'warning',
+        confirmButtonText: 'Ok',
+      });
+      return false;
+    }
+    return true;
+  }
+</script>

@@ -1,0 +1,142 @@
+<link rel="stylesheet" href="/css/main.css">
+<section class="login">
+  {{>login/sidebar}}
+  <div class="main">
+    <div class="login-container">
+      <h1 class="main__title">Вход в аккаунт</h1>
+      <!-- Чтобы отображались ошибки, нужно добавить к блоку с классом main__form класс error -->
+      {{!-- <form class="main__form" method="POST" action="/login"> --}}
+      <form class="main__form" name="login-form">
+        <div class="main__form-item login-form-email">
+          <p class="main__form-sign">Электронная почта</p>
+          <input class="common-input" name="email" type="email" placeholder="Введите адрес эл. почты"
+            id="user_signin_form_email" />
+        </div>
+        <div class="main__form-item login-form-password" id="user_login_form_password">
+          <p class="main__form-sign">Пароль</p>
+          <input class="common-input password-input" name="password" type="password" placeholder="Введите пароль"
+            id="user_signin_form_password" />
+          <button type="button" class="main__form-item_button eye-btn">
+            <img src="/assets/img/eye.svg" alt="eye">
+          </button>
+          <p class="main__form-err-message">Неверный пароль</p>
+        </div>
+        <div class="main__form-links">
+          <div class="main__form-remember">
+            <div class="main__form-checkbox">
+              <input id="remember" type="checkbox">
+              <label for="remember"></label>
+            </div>
+            Запомнить меня
+          </div>
+          <a href="/reset" class="main__form-forgot">Забыли пароль?</a>
+        </div>
+        <input type="hidden" name="_csrf" value="{{csrf}}" />
+        <div class="main__form-buttons">
+          <button class="main__form-current-btn signin-btn">
+            Вход
+          </button>
+          <a href="/register" class="main__form-other-link">Регистрация</a>
+        </div>
+      </form>
+    </div>
+  </div>
+</section>
+<script src="/js/shop-hide-password.js"></script>
+<script>
+  document.querySelector('.main__form-current-btn.signin-btn').addEventListener("click", function (e) {
+    e.preventDefault();
+
+    if (!isFilled()) return;
+    if (!isValid()) return;
+
+    const email = document.getElementById('user_signin_form_email').value;
+    const password = document.getElementById('user_signin_form_password').value;
+
+    const formData = new FormData();
+    formData.append('email', email);
+    formData.append('password', password);
+    const csrf = '{{csrf}}';
+
+    axios.defaults.headers.post['X-CSRF-Token'] = csrf;
+    axios.defaults.headers.post['Content-Type'] = 'multipart/form-data';
+    axios.post(`/login`, formData)
+      .then(function (response) {
+        const { message, messageType } = response.data;
+
+        const onAfterClose = (messageType) => {
+          if (messageType === 'success') {
+            return () => window.location.href = '/cabinet';
+          }
+          return () => window.location.reload();
+        }
+
+        Swal.fire({
+          title: `${messageType.toUpperCase()}!`,
+          text: message,
+          icon: messageType,
+          confirmButtonText: 'Ok',
+          onAfterClose: onAfterClose(messageType),
+        });
+
+      })
+      .catch(function (error) {
+        console.log(error);
+      });
+  })
+
+  const loginEmailContainer = document.querySelector('.main__form-item.login-form-email');
+  const loginPasswordContainer = document.querySelector('.main__form-item.login-form-password');
+
+  document.getElementById('user_signin_form_email').addEventListener('change', function () {
+    const regex = /\S+@\S+\.\S+/;
+    if (!regex.test(this.value)) {
+      loginEmailContainer.classList.add("error");
+    } else {
+      loginEmailContainer.classList.remove("error");
+    }
+  });
+
+  document.getElementById('user_signin_form_password').addEventListener('change', function () {
+    const regex = /^.{6,}$/;
+    if (!regex.test(this.value)) {
+      loginPasswordContainer.classList.add("error");
+    } else {
+      loginPasswordContainer.classList.remove("error");
+    }
+  });
+
+  function isFilled() {
+    const a = document.forms["login-form"]["email"].value;
+    const b = document.forms["login-form"]["password"].value;
+
+    if (a == null || a == "") loginEmailContainer.classList.add("error");
+    if (b == null || b == "") loginPasswordContainer.classList.add("error");
+
+    if (a == null || a == "", b == null || b == "") {
+      Swal.fire({
+        title: `WARNING!`,
+        text: "All fields should be filled",
+        icon: 'warning',
+        confirmButtonText: 'Ok',
+      });
+      return false;
+    }
+    return true;
+  }
+
+  function isValid() {
+    const loginForm = document.querySelector('form.main__form');
+    const notValid = !!loginForm.querySelector('.error');
+    if (notValid) {
+      Swal.fire({
+        title: `WARNING!`,
+        text: "All fields should be valid",
+        icon: 'warning',
+        confirmButtonText: 'Ok',
+      });
+      return false;
+    }
+    return true;
+  }
+</script>

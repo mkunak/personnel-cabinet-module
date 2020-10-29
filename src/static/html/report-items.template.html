@@ -1,0 +1,75 @@
+{{#each reports}}
+<div class="report-item">
+  <h4 class="report-item__id">Report number: {{this.id}}</h4>
+  <h4 class="report-item__created">Created at: {{this.created}}</h4>
+  <h4 class="report-item__changed">Changed at: {{this.changed}}</h4>
+  {{#if @first}}
+  <input type="hidden" class="report_id" value="{{this._id}}" />
+  {{/if}}
+  <div class="report-item__hours">
+    <div class="report-item__hours_header">
+      <h4>Working hours</h4>
+    </div>
+    <div class="report-item__hours_content">
+      <div class="report-item__wrapper hours">
+        <p class="task-item"><input value="{{this.workingHours}}" disabled /></p>
+      </div>
+    </div>
+  </div>
+  <div class="report-item__tasks">
+    <div class="report-item__tasks_header">
+      <h4>Tasks</h4>
+    </div>
+    <div class="report-item__tasks_content">
+      <div class="report-item__wrapper tasks-todo">
+        <h3>Todo:</h3>
+        {{#each this.tasks.todo}}
+        <p class="task-item"><input value="{{this}}" disabled /></p>
+        {{/each}}
+      </div>
+      <div class="report-item__wrapper tasks-in-progress">
+        <h3>In progress:</h3>
+        {{#each this.tasks.inProgress}}
+        <p class="task-item"><input value="{{this}}" disabled /></p>
+        {{/each}}
+      </div>
+      <div class="report-item__wrapper tasks-on-check">
+        <h3>On check:</h3>
+        {{#each this.tasks.inProgress}}
+        <p class="task-item"><input value="{{this}}" disabled /></p>
+        {{/each}}
+      </div>
+      <div class="report-item__wrapper tasks-done">
+        <h3>Done:</h3>
+        {{#each this.tasks.inProgress}}
+        <p class="task-item"><input value="{{this}}" disabled /></p>
+        {{/each}}
+      </div>
+    </div>
+  </div>
+  <div class="report-item__links">
+    <div class="report-item__links_header">
+      <h4>Links</h4>
+    </div>
+    <div class="report-item__links_content">
+      <div class="report-item__wrapper links">
+        {{#each this.links}}
+        <p class="task-item"><input value="{{this}}" disabled /></p>
+        {{/each}}
+      </div>
+    </div>
+  </div>
+  <div class="report-item__files">
+    <div class="report-item__files_header">
+      <h4>Files</h4>
+    </div>
+    <div class="report-item__files_content">
+      <div class="report-item__wrapper files">
+        {{#each this.files}}
+        <p class="task-item"><input value="{{this}}" disabled /></p>
+        {{/each}}
+      </div>
+    </div>
+  </div>
+</div>
+{{/each}}

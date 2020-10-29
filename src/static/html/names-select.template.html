@@ -1,0 +1,5 @@
+<option selected disabled>Выберите имя сотрудника</option>
+<option value="">All names</option>
+{{#each namesSelect}}
+<option value="{{this._id}}">{{this.firstName}} {{this.lastName}}</option>
+{{/each}}

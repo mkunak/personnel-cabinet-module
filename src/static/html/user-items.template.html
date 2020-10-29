@@ -1,0 +1,27 @@
+{{#each users}}
+<div class="user-item">
+  <h4 class="user-item__id">
+    <a href="/admin/user-profile/{{this._id}}">
+      {{this.firstName}} <span>{{this.lastName}}</span>
+    </a>
+  </h4>
+  <h4 class="user-item__created">Created at: {{this.created}}</h4>
+  <h4 class="user-item__changed">Changed at: {{this.changed}}</h4>
+  <input type="hidden" class="user_id" value="{{this._id}}" />
+  <div class="user-item__data">
+    <div class="user-item__data_header">
+      <h4>Personal data</h4>
+    </div>
+    <div class="user-item__data_content">
+      <div class="user-item__data_content">
+        <img
+          height="70"
+          width="70"
+          src="{{#if this.avatar}}{{this.avatar}}{{else}}/assets/img/user-photo.svg{{/if}}"
+        />
+      </div>
+      <p class="user-item__data_content">{{this.position}}</p>
+    </div>
+  </div>
+</div>
+{{/each}}

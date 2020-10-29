@@ -1,0 +1,55 @@
+<form class="user_reset_form" name="user_reset_form">
+  <div class="user_form_header__block">
+    <h2 class="user_form_header">Reset password</h2>
+    <span class="user_form_header_desc">Enter registered email. You will receive a mail with instuctions.</span>
+  </div>
+
+  <div class="input-field">
+    <label for="user_reset_form_email">Email</label>
+    <input type="email" required id="user_reset_form_email" name="email" />
+  </div>
+
+  <input type="hidden" name="_csrf" value="{{csrf}}" />
+
+  <div class="submit-block">
+    <button class="btn-submit btn-reset-pswd">Send</button>
+  </div>
+</form>
+
+<script>
+  document.querySelector('.btn-submit.btn-reset-pswd').addEventListener("click", function (e) {
+    e.preventDefault();
+
+    const email = document.getElementById('user_reset_form_email').value;
+
+    const formData = new FormData();
+    formData.append('email', email);
+    const csrf = '{{csrf}}';
+
+    axios.defaults.headers.post['X-CSRF-Token'] = csrf;
+    axios.defaults.headers.post['Content-Type'] = 'multipart/form-data';
+    axios.post(`/reset`, formData)
+      .then(function (response) {
+        const { message, messageType } = response.data;
+
+        const onAfterClose = (messageType) => {
+          if (messageType === 'success') {
+            return () => window.location.reload();
+          }
+          return () => window.location.reload();
+        }
+
+        Swal.fire({
+          title: `${messageType.toUpperCase()}!`,
+          text: message,
+          icon: messageType,
+          confirmButtonText: 'Ok',
+          onAfterClose: onAfterClose(messageType),
+        });
+
+      })
+      .catch(function (error) {
+        console.log(error);
+      });
+  })
+</script>

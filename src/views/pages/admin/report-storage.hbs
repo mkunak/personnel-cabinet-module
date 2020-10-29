@@ -1,0 +1,345 @@
+<section class="report-storage">
+  <div class="report-storage__header">
+    <h2>Report Storage</h2>
+    <h3 class="current-date">Current Date: <span>{{currentDate}}</span></h3>
+    <a href="/admin">Back to /admin</a>
+    {{!-- <a href="/cabinet/prereports">Back to prereports</a> --}}
+  </div>
+  {{>admin/reports-filter}}
+  <div class="container">
+    <div class="report-storage__content">
+      <div class="user-list">
+        <div class="user-list__header">
+          <h3>Users</h3>
+        </div>
+        <div class="user-list__content">
+          {{#each users}}
+            <div class="user-item">
+              <h4 class="user-item__id">
+                <a href="/admin/user-profile/{{this._id}}">
+                  {{this.firstName}} <span>{{this.lastName}}</span>
+                </a>
+              </h4>
+              <h4 class="user-item__created">Created at: {{this.created}}</h4>
+              <h4 class="user-item__changed">Changed at: {{this.changed}}</h4>
+              <input type="hidden" class="user_id" value="{{this._id}}" />
+              <div class="user-item__data">
+                <div class="user-item__data_header">
+                  <h4>Personal data</h4>
+                </div>
+                <div class="user-item__data_content">
+                  <div class="user-item__data_content">
+                    <img height="70" width="70"
+                      src="{{#if this.avatar}}{{this.avatar}}{{else}}/assets/img/user-photo.svg{{/if}}" />
+                  </div>
+                  <p class="user-item__data_content">{{this.position}}</p>
+                </div>
+              </div>
+            </div>
+          {{/each}}
+        </div>
+      </div>
+      <div class="prereport-list">
+        <div class="prereport-list__header">
+          <h3>Prereports</h3>
+        </div>
+        <div class="prereport-list__content">
+          {{#each prereports}}
+            <div class="prereport-item">
+              <h4 class="prereport-item__id">Prereport number: {{this.id}}</h4>
+              <h4 class="prereport-item__created">Created at: {{this.created}}</h4>
+              <h4 class="prereport-item__changed">Changed at: {{this.changed}}</h4>
+              {{#if @first}}
+                <input type="hidden" class="prereport_id" value="{{this._id}}" />
+              {{/if}}
+              <div class="prereport-item__hours">
+                <div class="prereport-item__hours_header">
+                  <h4>Working hours</h4>
+                </div>
+                <div class="prereport-item__hours_content">
+                  <div class="prereport-item__wrapper hours">
+                    <p class="task-item"><input value="{{this.workingHours}}" disabled /></p>
+                  </div>
+                </div>
+              </div>
+              <div class="prereport-item__tasks">
+                <div class="prereport-item__tasks_header">
+                  <h4>Tasks</h4>
+                </div>
+                <div class="prereport-item__tasks_content">
+                  <div class="prereport-item__wrapper tasks-todo">
+                    <h3>Todo:</h3>
+                    {{#each this.tasks.todo}}
+                      <p class="task-item"><input value="{{this}}" disabled /></p>
+                    {{/each}}
+                  </div>
+                </div>
+              </div>
+            </div>
+          {{/each}}
+        </div>
+      </div>
+      <div class="report-list">
+        <div class="report-list__header">
+          <h3>Reports</h3>
+        </div>
+        <div class="report-list__content">
+          {{#each reports}}
+            <div class="report-item">
+              <h4 class="report-item__id">Report number: {{this.id}}</h4>
+              <h4 class="report-item__created">Created at: {{this.created}}</h4>
+              <h4 class="report-item__changed">Changed at: {{this.changed}}</h4>
+              {{#if @first}}
+                <input type="hidden" class="report_id" value="{{this._id}}" />
+              {{/if}}
+              <div class="report-item__hours">
+                <div class="report-item__hours_header">
+                  <h4>Working hours</h4>
+                </div>
+                <div class="report-item__hours_content">
+                  <div class="report-item__wrapper hours">
+                    <p class="task-item"><input value="{{this.workingHours}}" disabled /></p>
+                  </div>
+                </div>
+              </div>
+              <div class="report-item__tasks">
+                <div class="report-item__tasks_header">
+                  <h4>Tasks</h4>
+                </div>
+                <div class="report-item__tasks_content">
+                  <div class="report-item__wrapper tasks-todo">
+                    <h3>Todo:</h3>
+                    {{#each this.tasks.todo}}
+                      <p class="task-item"><input value="{{this}}" disabled /></p>
+                    {{/each}}
+                  </div>
+                  <div class="report-item__wrapper tasks-in-progress">
+                    <h3>In progress:</h3>
+                    {{#each this.tasks.inProgress}}
+                      <p class="task-item"><input value="{{this}}" disabled /></p>
+                    {{/each}}
+                  </div>
+                  <div class="report-item__wrapper tasks-on-check">
+                    <h3>On check:</h3>
+                    {{#each this.tasks.inProgress}}
+                      <p class="task-item"><input value="{{this}}" disabled /></p>
+                    {{/each}}
+                  </div>
+                  <div class="report-item__wrapper tasks-done">
+                    <h3>Done:</h3>
+                    {{#each this.tasks.inProgress}}
+                      <p class="task-item"><input value="{{this}}" disabled /></p>
+                    {{/each}}
+                  </div>
+                </div>
+              </div>
+              <div class="report-item__links">
+                <div class="report-item__links_header">
+                  <h4>Links</h4>
+                </div>
+                <div class="report-item__links_content">
+                  <div class="report-item__wrapper links">
+                    {{#each this.links}}
+                      <p class="task-item"><input value="{{this}}" disabled /></p>
+                    {{/each}}
+                  </div>
+                </div>
+              </div>
+              <div class="report-item__files">
+                <div class="report-item__files_header">
+                  <h4>Files</h4>
+                </div>
+                <div class="report-item__files_content">
+                  <div class="report-item__wrapper files">
+                    {{#each this.files}}
+                      <p class="task-item"><input value="{{this}}" disabled /></p>
+                    {{/each}}
+                  </div>
+                </div>
+              </div>
+            </div>
+          {{/each}}
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+<script>
+  const editReportBtn = document.querySelector('.report-item__edit-btn .edit-button');
+
+  editReportBtn.addEventListener("click", function (e) {
+    e.preventDefault();
+    const reportId = document.querySelector('.report_id').value;
+    const workingHours = document.querySelector('.report-item__wrapper.hours .first').value;
+    const todoTaskNodes = document.querySelectorAll('.report-item__wrapper.tasks-todo .first');
+    const todoTasks = [...todoTaskNodes].map((node) => node.value).filter((task) => task).join('***');
+    const inProgressTaskNodes = document.querySelectorAll('.report-item__wrapper.tasks-in-progress .first');
+    const inProgressTasks = [...inProgressTaskNodes].map((node) => node.value).filter((task) => task).join('***');
+    const onCheckTaskNodes = document.querySelectorAll('.report-item__wrapper.tasks-on-check .first');
+    const onCheckTasks = [...onCheckTaskNodes].map((node) => node.value).filter((task) => task).join('***');
+    const doneTaskNodes = document.querySelectorAll('.report-item__wrapper.tasks-done .first');
+    const doneTasks = [...doneTaskNodes].map((node) => node.value).filter((task) => task).join('***');
+    const linksNodes = document.querySelectorAll('.report-item__wrapper.links .first');
+    const links = [...linksNodes].map((node) => node.value).filter((task) => task).join('***');
+
+    const csrf = '{{csrf}}';
+    const formData = new FormData();
+    formData.append('workingHours', workingHours);
+    formData.append('todoTasks', todoTasks);
+    formData.append('inProgressTasks', inProgressTasks);
+    formData.append('onCheckTasks', onCheckTasks);
+    formData.append('doneTasks', doneTasks);
+    formData.append('links', links);
+    formData.append('reportId', reportId);
+
+    axios.defaults.headers.post['X-CSRF-Token'] = csrf;
+    axios.defaults.headers.post['Content-Type'] = 'multipart/form-data';
+    axios.post(`/cabinet/update-report`, formData)
+      .then(function (response) {
+        const { message, messageType } = response.data;
+
+        const onAfterClose = (messageType) => {
+          if (messageType === 'success') {
+            return () => window.location.reload();
+          }
+          return () => window.location.reload();
+        }
+
+        Swal.fire({
+          title: `${messageType.toUpperCase()}!`,
+          text: message,
+          icon: messageType,
+          confirmButtonText: 'Ok',
+          onAfterClose: onAfterClose(messageType),
+        });
+      })
+      .catch(function (error) {
+        console.log(error);
+      });
+  });
+</script>
+<script>
+  const editPrereportBtn = document.querySelector('.prereport-item__edit-btn .edit-button');
+
+  editPrereportBtn.addEventListener("click", function (e) {
+    e.preventDefault();
+    const prereportId = document.querySelector('.prereport_id').value;
+    const workingHours = document.querySelector('.prereport-item__wrapper.hours .first').value;
+    const todoTaskNodes = document.querySelectorAll('.prereport-item__wrapper.tasks-todo .first');
+    const todoTasks = [...todoTaskNodes].map((node) => node.value).filter((task) => task).join('***');
+
+    const csrf = '{{csrf}}';
+    const formData = new FormData();
+    formData.append('workingHours', workingHours);
+    formData.append('todoTasks', todoTasks);
+    formData.append('prereportId', prereportId);
+
+    axios.defaults.headers.post['X-CSRF-Token'] = csrf;
+    axios.defaults.headers.post['Content-Type'] = 'multipart/form-data';
+    axios
+      .post(`/cabinet/update-prereport`, formData)
+      .then(function (response) {
+        const { message, messageType } = response.data;
+
+        const onAfterClose = (messageType) => {
+          if (messageType === 'success') {
+            return () => window.location.reload();
+          }
+          return () => window.location.reload();
+        }
+
+        Swal.fire({
+          title: `${messageType.toUpperCase()}!`,
+          text: message,
+          icon: messageType,
+          confirmButtonText: 'Ok',
+          onAfterClose: onAfterClose(messageType),
+        });
+      })
+      .catch(function (error) {
+        console.log(error);
+      });
+  });
+</script>
+<script>
+  const userListContainer = document.querySelector('.user-list__content');
+  const namesSelectContainer = document.querySelector('.filter__item select.names');
+  const reportsContainer = document.querySelector('.report-list__content');
+  const prereportsContainer = document.querySelector('.prereport-list__content');
+
+  const positions = document.querySelector('select.positions');
+  const names = document.querySelector('select.names');
+
+  let position = '';
+  positions.addEventListener('change', function () {
+    position = this.options[this.selectedIndex].value;
+    console.log(position);
+
+    const csrf = '{{csrf}}';
+    const formData = new FormData();
+    formData.append('position', position);
+
+    axios.defaults.headers.post['X-CSRF-Token'] = csrf;
+    axios.defaults.headers.post['Content-Type'] = 'multipart/form-data';
+    axios
+      .post(`/admin/report-storage/by-position`, formData)
+      .then(async function (response) {
+        const { users, namesSelect, reports, prereports } = response.data;
+
+        const namesSelectTemplate = await getTemplate(`/html/names-select.template.html`, { namesSelect });
+        const userItemsTemplate = await getTemplate(`/html/user-items.template.html`, { users });
+        const reportItemsTemplate = await getTemplate(`/html/report-items.template.html`, { reports });
+        const prereportItemsTemplate = await getTemplate(`/html/prereport-items.template.html`, { prereports });
+
+        namesSelectContainer.innerHTML = namesSelectTemplate;
+        userListContainer.innerHTML = userItemsTemplate;
+        reportsContainer.innerHTML = reportItemsTemplate;
+        prereportsContainer.innerHTML = prereportItemsTemplate;
+      })
+      .catch(function (error) {
+        console.log(error);
+      });
+  });
+
+  let userId = '';
+  names.addEventListener('change', function () {
+    userId = this.options[this.selectedIndex].value;
+
+    const csrf = '{{csrf}}';
+    const formData = new FormData();
+    formData.append('position', position);
+    formData.append('userId', userId);
+
+    axios.defaults.headers.post['X-CSRF-Token'] = csrf;
+    axios.defaults.headers.post['Content-Type'] = 'multipart/form-data';
+    axios
+      .post(`/admin/report-storage/by-name`, formData)
+      .then(async function (response) {
+        const { users, namesSelect, reports, prereports } = response.data;
+
+        const userItemsTemplate = await getTemplate(`/html/user-items.template.html`, { users });
+        const reportItemsTemplate = await getTemplate(`/html/report-items.template.html`, { reports });
+        const prereportItemsTemplate = await getTemplate(`/html/prereport-items.template.html`, { prereports });
+
+        userListContainer.innerHTML = userItemsTemplate;
+        reportsContainer.innerHTML = reportItemsTemplate;
+        prereportsContainer.innerHTML = prereportItemsTemplate;
+      })
+      .catch(function (error) {
+        console.log(error);
+      });
+  });
+
+  async function getTemplate(url, data) {
+    return await fetch(url, {
+      method: "GET",
+      headers: { "Content-Type": "text/html" },
+    })
+      .then((res) => res.text())
+      .then((template) => {
+        const compiledTemplate = Handlebars.compile(template);
+        return compiledTemplate(data);
+      })
+      .catch((e) => console.log('>>> Fetch error:', e));
+  };
+</script>

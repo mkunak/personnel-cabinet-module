@@ -1,0 +1,33 @@
+{{#each prereports}}
+<div class="prereport-item">
+  <h4 class="prereport-item__id">Prereport number: {{this.id}}</h4>
+  <h4 class="prereport-item__created">Created at: {{this.created}}</h4>
+  <h4 class="prereport-item__changed">Changed at: {{this.changed}}</h4>
+  {{#if @first}}
+  <input type="hidden" class="prereport_id" value="{{this._id}}" />
+  {{/if}}
+  <div class="prereport-item__hours">
+    <div class="prereport-item__hours_header">
+      <h4>Working hours</h4>
+    </div>
+    <div class="prereport-item__hours_content">
+      <div class="prereport-item__wrapper hours">
+        <p class="task-item"><input value="{{this.workingHours}}" disabled /></p>
+      </div>
+    </div>
+  </div>
+  <div class="prereport-item__tasks">
+    <div class="prereport-item__tasks_header">
+      <h4>Tasks</h4>
+    </div>
+    <div class="prereport-item__tasks_content">
+      <div class="prereport-item__wrapper tasks-todo">
+        <h3>Todo:</h3>
+        {{#each this.tasks.todo}}
+        <p class="task-item"><input value="{{this}}" disabled /></p>
+        {{/each}}
+      </div>
+    </div>
+  </div>
+</div>
+{{/each}}

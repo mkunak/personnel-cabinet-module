@@ -1,0 +1,81 @@
+.container {
+  margin-right: 5vw;
+  margin-left: 25vw;
+}
+
+.report-storage__header {
+  display: flex;
+  flex-direction: column;
+}
+
+.report-storage__content {
+  display: flex;
+  justify-content: space-between;
+}
+
+.user-list__header,
+.report-list__header,
+.prereport-list__header{
+  text-transform: uppercase;
+  text-align: center;
+  margin-top: 1vh;
+  margin-bottom: 1vh;
+  font-weight: 700;
+}
+
+.user-list,
+.report-list,
+.prereport-list {
+  border: 3px solid black;
+  border-radius: 5px;
+  width: 45vw;
+  margin: 1vh 1vw;
+}
+
+.user-item,
+.report-item,
+.prereport-item {
+  border: 1px solid black;
+  border-radius: 4px;
+  margin: 1vh 1vw;
+  padding: 1vh 1vw;
+}
+
+.prereport-item__edit-btn,
+.report-item__edit-btn {
+  text-align: center;
+}
+
+.report-item__hours_header,
+.prereport-item__hours_header,
+.report-item__tasks_header,
+.prereport-item__tasks_header,
+.report-item__links_header,
+.prereport-item__links_header,
+.report-item__files_header,
+.report-item__files_header {
+  text-align: center;
+  font-weight: 700;
+}
+
+.report-item__wrapper,
+.prereport-item__wrapper {
+  margin-top: 2vh;
+  margin-bottom: 2vh;
+}
+
+.task-item {
+  text-align: center;
+}
+
+.task-item input {
+  width: 75%;
+}
+
+.report-item__edit-btn .edit-button,
+.prereport-item__edit-btn .edit-button {
+  padding: 2vh 2vw;
+  color: white;
+  font-weight: 700;
+  background-color: rgb(106, 139, 209);
+}

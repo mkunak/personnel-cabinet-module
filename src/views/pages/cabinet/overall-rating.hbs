@@ -1,0 +1,34 @@
+<section class="cabinet">
+  {{>cabinet/sidebar}}
+  <div class="overall-rating container">
+    <div class="cabinet__overall-rating_header">
+      <h1>Overall rating Page</h1>
+      <h5>{{currentDate}}</h5>
+    </div>
+    <div class="cabinet__overall-rating_content">
+      <table>
+        <tbody>
+          <tr>
+            <td>#</td>
+            <td>First name</td>
+            <td>Last name</td>
+            <td>Position</td>
+            <td>Green points</td>
+            <td>Red points</td>
+          </tr>
+          {{#each users}}
+            <tr>
+              <td>{{incremented @index}}</td>
+              <td>{{this.firstName}}</td>
+              <td>{{this.lastName}}</td>
+              <td>{{this.position}}</td>
+              <td>{{this.points.green}}</td>
+              <td>{{this.points.red}}</td>
+            </tr>
+          {{/each}}
+        </tbody>
+      </table>
+    </div>
+  </div>
+</section>
+<script src="/js/exit-window.js"></script>

@@ -1,0 +1,215 @@
+<header class="header header-cabinet">
+  <div class="header__logo">
+    <img src="/assets/img/logo.svg" alt="">
+  </div>
+  <label for="burger" class="header__burger">
+    <span></span>
+  </label>
+</header>
+<section class="cabinet">
+  <input class="cabinet__check" id="burger" type="checkbox">
+  {{>cabinet/sidebar}}
+  <div class="cabinet__content">
+    <div class="cabinet-container">
+      <div class="cabinet__links">
+        <div class="cabinet__link-wrapper active">
+          <a class="cabinet__link" href="/cabinet/prereports">Предрепорт</a>
+        </div>
+        <div class="cabinet__link-wrapper">
+          <a class="cabinet__link" href="/cabinet/reports">Репорт</a>
+        </div>
+      </div>
+      <div class="cabinet__content-wrapper reports">
+        <div class="cabinet__content-column">
+          <div class="cabinet__report-last">
+            <h4 class="cabinet__block-title">
+              Ваш последний предрепорт
+            </h4>
+            <div class="cabinet__report-qa">
+              <p class="cabinet__report-quest">Дата и время отправки</p>
+              <div class="cabinet__report-answers">
+                <p class="cabinet__report-answer">{{prereport.changed}}</p>
+              </div>
+            </div>
+            <div class="cabinet__report-qa">
+              <p class="cabinet__report-quest">Планируется работать</p>
+              <div class="cabinet__report-answers">
+                <p class="cabinet__report-answer">{{prereport.workingHours}} часов</p>
+              </div>
+            </div>
+            <div class="cabinet__report-qa">
+              <p class="cabinet__report-quest">Планируемые задачи</p>
+              <div class="cabinet__report-answers">
+                {{#each prereport.tasks.todo}}
+                  <p class="cabinet__report-answer">{{incremented @index}}. {{this}}</p>
+                {{/each}}
+              </div>
+            </div>
+          </div>
+          <div class="cabinet__archive">
+            <h2 class="cabinet__archive-title">Архив отчетов</h1>
+              <button class="cabinet__button storage-btn">
+                <img src="/assets/img/next-icon.svg" alt="">
+              </button>
+          </div>
+        </div>
+        <div class="cabinet__content-column">
+          <div class="cabinet__create-report">
+            <h4 class="cabinet__block-title">
+              Создание нового предрепорта
+            </h4>
+            <form action="" class="cabinet__create-report-form">
+              <div class="cabinet__report-time">
+                <p class="cabinet__create-report-title">Планируется работать<span>*</span></p>
+                <div class="cabinet__create-input-wrapper">
+                  <input type="number" placeholder="чч:мм" min="0"
+                    class="common-input cabinet__create-report_input prereport-working-hours">
+                </div>
+              </div>
+              <div class="cabinet__report-tasks cabinet__prereport-tasks">
+                <p class="cabinet__create-report-title">Планируемые задачи<span>*</span></p>
+                <div class="cabinet__create-input-wrapper prereport-task-wrapper">
+                  <input type="text" placeholder="1. Введите задачу"
+                    class="common-input cabinet__create-report_input prereport-task">
+                </div>
+              </div>
+              <div class="cabinet__create-report-btn-wrapper">
+                <button class="cabinet__create-report_button">
+                  Отправить
+                  <img src="/assets/img/next-icon.svg" alt="">
+                </button>
+              </div>
+            </form>
+          </div>
+        </div>
+        <div class="cabinet__content-column">
+          <div class="cabinet__advice">
+            <h3 class="cabinet__advice-title">Полезный </br> совет</h3>
+            <div class="cabinet__advice-description">
+              {{#each tip.data}}
+                <p class="cabinet__advice-description-item">{{this}}</p>
+              {{/each}}
+            </div>
+            <input type="hidden" name="tipId" value="{{tip.id}}" class="current-tip-id" />
+            <div class="cabinet__btn-wrapper">
+              <button class="cabinet__button new-tip-btn">
+                <img src="/assets/img/next-icon.svg" alt="">
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+<script src="/js/exit-window.js"></script>
+<script>
+  const showAllInputs = function () {
+    const taskContainer = document.querySelector('.cabinet__prereport-tasks');
+
+    taskContainer.children[taskContainer.children.length - 1].querySelector('input')
+      .addEventListener('change', function (e) {
+        taskContainer.insertAdjacentHTML('beforeend', `
+          <div class="cabinet__create-input-wrapper prereport-task-wrapper">
+            <input type="text" placeholder="1. Введите задачу"
+              class="common-input cabinet__create-report_input prereport-task">
+          </div>
+        `);
+
+        showAllInputs();
+      });
+  };
+
+  showAllInputs();
+</script>
+<script>
+  const sendPrereportBtn = document.querySelector('.cabinet__create-report_button');
+
+  sendPrereportBtn.addEventListener("click", function (e) {
+    e.preventDefault();
+    const workingHours = document.querySelector('.cabinet__create-input-wrapper .prereport-working-hours').value;
+
+    const taskNodes = document.querySelectorAll('.cabinet__create-input-wrapper .prereport-task');
+    const tasks = [...taskNodes].map((node) => node.value).filter((task) => task).join('***');
+
+    console.log(tasks);
+
+    const csrf = '{{csrf}}';
+    const formData = new FormData();
+    formData.append('workingHours', workingHours);
+    formData.append('tasks', tasks);
+
+    axios.defaults.headers.post['X-CSRF-Token'] = csrf;
+    axios.defaults.headers.post['Content-Type'] = 'multipart/form-data';
+    axios.post(`/cabinet/create-prereport`, formData)
+      .then(function (response) {
+        const { message, messageType } = response.data;
+
+        console.log('>>> response', response);
+
+        const onAfterClose = (messageType) => {
+          if (messageType === 'success') {
+            return () => window.location.reload();
+          }
+          return () => window.location.reload();
+        }
+
+        Swal.fire({
+          title: `${messageType.toUpperCase()}!`,
+          text: message,
+          icon: messageType,
+          confirmButtonText: 'Ok',
+          onAfterClose: onAfterClose(messageType),
+        });
+      })
+      .catch(function (error) {
+        console.log(error);
+      });
+  });
+</script>
+<script>
+  const newTipBtn = document.querySelector('.cabinet__button.new-tip-btn');
+
+  newTipBtn.addEventListener("click", function (e) {
+    e.preventDefault();
+
+    const csrf = '{{csrf}}';
+    const tipId = document.querySelector('.current-tip-id');
+
+    const formData = new FormData();
+    formData.append('tipId', tipId.value);
+
+    axios.defaults.headers.post['X-CSRF-Token'] = csrf;
+    axios.defaults.headers.post['Content-Type'] = 'multipart/form-data';
+    axios.post(`/cabinet/new-tip`, formData)
+      .then(function (response) {
+        const { tip } = response.data;
+
+        const tipContainer = document.querySelector('.cabinet__advice-description');
+
+        const template = tip.data.map((tipData) => {
+          return `<p class="cabinet__advice-description-item">${tipData}</p>`;
+        }).join('');
+
+        tipContainer.innerHTML = template;
+
+        tipId.setAttribute('value', tip.id);
+      })
+      .catch(function (error) {
+        console.log(error);
+      });
+  });
+</script>
+<script>
+  const storageBtn = document.querySelector('.storage-btn');
+  storageBtn.addEventListener('click', function () {
+    window.location.href = '/cabinet/report-storage';
+  });
+</script>
+<script type="text/javascript">
+  window.addEventListener('keydown', function (e) {
+    if (e.keyIdentifier == 'U+000A' || e.keyIdentifier == 'Enter' || e.keyCode == 13) {
+      if (e.target.nodeName == 'INPUT' && e.target.type == 'text') { e.preventDefault(); return false; }
+    }
+  }, true);
+</script>

@@ -1,0 +1,6 @@
+<Helpers are something that's independent to your 
+current project and something you create to make your code 
+reusable and your life lot easier. Common helper function could 
+be like formatting the given date, checking if the given date 
+is this week etc.>
+HOF - high-order function
